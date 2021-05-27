@@ -1,0 +1,265 @@
+# ---------------
+# mode: light | dark | auto | time
+mode: auto
+
+# Theme color for customize
+# Notice: color value must in double quotes: "#000000"
+colors:
+  primary: "#0078E7"
+  # primary: "#6200ee"
+  bg: "#f5f5f5"
+  selection_bg: "#8e71c1"
+  tag_start_color: "#999999"
+  tag_end_color: "#0078E7"
+  dark:
+    block: "#1b1f2e"
+    # block: "#17202A"
+
+# Favicon
+# ---------------
+favicon: /page.ico
+
+
+toc:
+  list_number: true
+  max_depth: 6
+  min_depth: 1
+  # placeholder: 很遗憾，咱没写啥目录
+  collapse: true
+
+# Social Links.
+social:
+  - name: RSS
+    # set rss in your root config
+    # https://github.com/hexojs/hexo-generator-feed
+    link: /atom.xml # config.feed.path
+    icon: icon-rss-line
+    color: orange
+  - name: GitHub
+    link: https://github.com/AyLax
+    icon: icon-github-line
+    color: "#6e5494"
+  - name: E-Mail
+    link: mailto:zhoubye@foxmail.com
+    icon: icon-mail-line
+    color: "#8E71C1"
+
+codeblock:
+  copy_btn: true
+  prismjs:
+    light: default
+    dark: tomorrow
+
+# Extra links
+pages:
+  - name: 我的小伙伴们
+    url: /links/
+    icon: icon-genderless-line
+    color: dodgerblue
+
+# pages
+# -------
+# friend
+anonymous_image: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg
+
+albums:
+  enable: false
+  icon: icon-gallery-line
+  src: /js/gallery-decrypt.js
+
+
+# Sidebar Avatar
+avatar:
+  enable: true
+  url: /avatar.jpeg
+  # If true, the avatar would be dispalyed in circle.
+  rounded: true
+  # The value of opacity should be choose from 0 to 1 to set the opacity of the avatar.
+  opacity: 1
+  mickey_mouse: false
+  status:
+    enable: true
+    emoji: ✨
+    message: Tomorrow we are the next!
+
+# main menu navigation
+menu:
+  home:
+    path: /
+    icon: icon-home-4-line
+  list:
+    - type: archives
+      path: /archives/
+      icon: icon-archive-line
+    - type: categories
+      path: /categories/
+      icon: icon-folder-2-line
+    - type: tags
+      path: /tags/
+      icon: icon-price-tag-3-line
+  custom:
+    title: 文档
+    path: https://yun.yunyoujun.cn
+    icon: icon-settings-line
+
+# archive
+archive:
+  last_word: 没有更多的黑历史了_(:з」∠)_
+
+
+# You can set color for every tag or category.
+tags:
+  Vue: "#4fc08d"
+  Hexo: "#0E83CD"
+  CSS: "#5298d1"
+  Node.js: "#026E00"
+  Git: "#F14E32"
+  React: "#61dafb"
+  Python: "#3776ab"
+  PHP: "#8892BF"
+  VS Code: "#0066B8"
+  JavaScript: "#F4DF4F"
+  TypeScript: "#317AC6"
+  Laravel: "#F4645F"
+
+categories:
+  笔记: dimgray
+
+# post type
+types:
+  link:
+    color: blue
+    icon: icon-external-link-line
+  github:
+    color: black
+    icon: icon-github-line
+  notion:
+    color: black
+    icon: icon-notion
+
+# post_card
+post_card:
+  opacity: 0.9
+
+
+# UI
+banner:
+  enable: true
+  title: 朝花夕拾
+  src: /js/ui/banner.js
+  border: true
+  cloud:
+    enable: true
+    color: "white"
+  go_down:
+    enable: true
+    icon: icon-arrow-down-s-line
+
+
+# Post edit
+# Dependencies: https://github.com/hexojs/hexo-deployer-git
+post_edit:
+  enable: false
+  url: https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name # Link for view source.
+
+# Footer Settings
+# ---------------
+footer:
+  since: 2019
+
+  # Icon between year and copyright info.
+  icon:
+    # `heart` is recommended with animation in red (#ff0000).
+    name: icon-cloud-line
+    # If you want to animate the icon, set it to true.
+    animated: true
+    # Change the color of icon, using Hex Code.
+    color: "#0078E7"
+    # url: https://sponsors.yunyoujun.cn
+    # title: 云游君的赞助者们
+
+  powered:
+    # Hexo link (Powered by Hexo).
+    enable: true
+
+  # Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
+  # https://beian.miit.gov.cn/
+  beian:
+    enable: false
+    # icp: 苏ICP备xxxxxxxx号
+
+  live_time:
+    enable: false
+    prefix: 本博客已萌萌哒地运行
+    suffix: (●'◡'●)
+    start_time: "2019-04-12T00:00:00"
+
+
+# Post meta display settings
+post_meta:
+  item_text: false
+  created_at: true
+  updated_at: true
+  categories: true
+  tags: true
+
+# notice pin board
+notice:
+  enable: false
+  content: Thanks for watching my blog.
+
+# third party
+# ----------------
+
+# say something
+# https://say.elpsy.cn
+say:
+  enable: true
+  # api: https://say.elpsy.cn/sentences.json
+  # /data/sentences.json
+  api: https://cdn.jsdelivr.net/gh/ElpsyCN/say@gh-pages/sentences.json
+  # src is the script
+  src: /js/say.js
+  # https://developer.hitokoto.cn/sentence/
+  hitokoto:
+    enable: true
+    api: https://v1.hitokoto.cn
+    # api: https://v1.hitokoto.cn?c=a&c=b&c=c&c=d&c=k
+
+
+
+# plugins
+aplayer:
+  global: false
+  meting: true
+  # https://github.com/metowolf/MetingJS/tree/v1.2#option
+  widget:
+    enable: false
+    autoplay: false
+    # theme: "#2980b9"
+    loop: all
+    order: list
+    preload: auto
+    volume: 0.7
+    mutex: true
+    lrcType: 0
+    listFolded: false
+    listMaxHeight: 340px
+    audio:
+      - name: 星宿计时
+        artist: 杉田朗/洛天依
+        url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/audio/star-timer.mp3
+        cover: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0.jpg
+    meting:
+      enable: true
+      id: 308168565
+      server: netease
+      type: playlist
+
+# special
+mourn:
+  enable: false
+  days:
+    - "4-4"
+    - "9-18"
+
