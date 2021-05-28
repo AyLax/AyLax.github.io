@@ -6,14 +6,12 @@ mode: auto
 # Notice: color value must in double quotes: "#000000"
 colors:
   primary: "#0078E7"
-  # primary: "#6200ee"
   bg: "#f5f5f5"
   selection_bg: "#8e71c1"
   tag_start_color: "#999999"
   tag_end_color: "#0078E7"
   dark:
     block: "#1b1f2e"
-    # block: "#17202A"
 
 # Favicon
 # ---------------
@@ -27,7 +25,6 @@ favicon: /page.ico
 sidebar:
   src: /js/sidebar.js
   bg_image: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/bg/timing.webp
-  # dark_bg_image: https://cdn.jsdelivr.net/gh/YunYouJun/cdn@master/img/bg/dark-alpha-stars-timing-1.webp
   bg_position: bottom 1rem center
   tagcloud:
     enable: false
@@ -63,9 +60,9 @@ codeblock:
     light: default
     dark: tomorrow
 
-# Extra links
+
 pages:
-  - name: 我的小伙伴们
+  - name: Other                                                                                                                                                               
     url: /links/
     icon: icon-genderless-line
     color: dodgerblue
@@ -75,13 +72,6 @@ pages:
 # friend
 anonymous_image: https://cdn.jsdelivr.net/gh/Aylax/cdn/img/avatar/none.jpeg
 
-albums:
-  enable: false
-  icon: icon-gallery-line
-  src: /js/gallery-decrypt.js
-
-girls:
-  enable: false
 
 # Sidebar Avatar
 avatar:
@@ -113,9 +103,9 @@ menu:
       path: /tags/
       icon: icon-price-tag-3-line
   custom:
-    title: 文档
-    path: https://yun.yunyoujun.cn
-    icon: icon-settings-line
+    title: about
+    path: /about
+    icon: icon-cloud-line
 
 # archive
 archive:
@@ -159,69 +149,7 @@ types:
 post_card:
   opacity: 0.9
 
-# link
-# -------
-# preload:
-#   style:
-#     - /css/hexo-theme-yun.css
-#   script:
-#     - /js/utils.js
-#     - /js/hexo-theme-yun.js
-# 
-# prefetch:
-#   script:
-#     - /js/sidebar.js
-# 
-# dns_prefetch:
-#   # - https://xxx
-# 
-# # do more(TCP handshake...) than dns-fetch
-# preconnect:
-#   - https://cdn.jsdelivr.net
-# 
-# # img loading="lazy"
-# lazyload:
-#   enable: true
-# 
-# # pjax
-# pjax:
-#   enable: false
-#   src: /js/pjax.js
-# 
-# # stylesheets loaded in the <head>
-# css:
-#   - /css/hexo-theme-yun.css
-# 
-# # scripts loaded in the end of the <head>
-# js:
-#   - /js/utils.js
-#   - /js/hexo-theme-yun.js
-# 
-# # custom your assets in head
-# head:
-#   css:
-#   js:
-#     base:
-#     async:
-#     defer:
-# 
-# # cdn for third-party library (always include)
-# cdn:
-#   pre: ""
-#   # pre: https://cdn.jsdelivr.net/gh/YunYouJun/yunyoujun.github.io
-#   css:
-#     yun-markdown-css: https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.24/dist/yun/yun-markdown.min.css
-#     # github-markdown-css: https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.css
-#   js:
-#     base:
-#     async:
-#       iconfont: //at.alicdn.com/t/font_1140697_j5gk85dg4pf.js
-#     defer:
-# 
-# # cdn for third-party library (alternative include)
-# # please see in _vendors.yml
-# vendors:
- 
+
 # UI
 banner:
   enable: true
@@ -272,7 +200,7 @@ trianglify:
   opacity: 0.5
 
 cursor:
-  enable: false
+  enable: true
   default: https://cdn.jsdelivr.net/gh/AyLax/cdn/css/md/cursor/pointer.cur
   pointer: https://cdn.jsdelivr.net/gh/AyLax/cdn/css/md/cursor/link.cur
   text: https://cdn.jsdelivr.net/gh/AyLax/cdn/css/md/cursor/text.cur
@@ -302,22 +230,18 @@ reward:
   # url: https://github.com/YunYouJun/yunyoujun.github.io/issues/96
   methods:
     - name: 支付宝
-      path: #https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/alipay-qrcode.jpg
+      path: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/qr/none.jpeg
       color: "#00A3EE"
       icon: icon-alipay-line
     - name: QQ 支付
-      path: #https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/qqpay-qrcode.png
+      path: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/qr/none.jpeg
       color: "#12B7F5"
       icon: icon-qq-line
     - name: 微信支付
-      path: #https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/wechatpay-qrcode.jpg
+      path: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/qr/none.jpeg
       color: "#2DC100"
       icon: icon-wechat-pay-line
-    # - name: paypal
-    #   link: https://paypal.com
-    #   path: https://www.paypalobjects.com/images/shared/paypal-logo-129x32.svg
-    #   color: "#2D70B5"
-    #   icon: icon-paypal-line
+
 
 # Creative Commons 4.0 International License.
 # https://creativecommons.org/licenses/
@@ -342,8 +266,7 @@ post_edit:
   url: https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name # Link for view source.
 
 # Footer Settings
-# ---------------
-footer:
+# --------------- footer:
   since: 2021
 
   # Icon between year and copyright info.
@@ -422,6 +345,8 @@ say:
 
 # Comments
 # See config file in /data/_comments.yml.
+# Comments
+
 
 # Show Views / Visitors of the website / page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi
@@ -441,27 +366,25 @@ wordcount:
   count: true
   time: true
 
-# search
-search:
-  modal: true
-  bg_image: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/bg/page_light.jpeg
-  dark_bg_image: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/bg/page_blue.jpeg
-  # placeholder: 想要搜些什么？
 
 engine_search:
   enable: false
   href: "https://www.google.com/search?q=site:"
   # href: "https://www.baidu.com/s?wd=site:"
   # href: "https://www.bing.com/search?q=site:"
-  domain: aylax.github.io
+  domain: yunyoujun.cn
 
 # https://github.com/wzpan/hexo-generator-search
 local_search:
-  enable: false
+  enable: true
   src: /js/search/local-search.js
 
 # https://github.com/oncletom/hexo-algolia
-
+algolia_search:
+  enable: false
+  src: /js/search/algolia-search.js
+  hits:
+    per_page: 8 # the number of search results per page
 
 
 # That is it only render those page which has `katex: true` in Front-matter.
@@ -473,29 +396,29 @@ katex:
 
 # plugins
 aplayer:
-  global: false
+  global: true
   meting: true
   # https://github.com/metowolf/MetingJS/tree/v1.2#option
   widget:
-    enable: false
+    enable: true
     autoplay: false
-    # theme: "#2980b9"
+    theme: "#c46a6a"
     loop: all
     order: list
     preload: auto
-    volume: 0.7
+    volume: 0.12
     mutex: true
     lrcType: 0
     listFolded: false
     listMaxHeight: 340px
     audio:
-      - name: 星宿计时
-        artist: 杉田朗/洛天依
-        url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/audio/star-timer.mp3
-        cover: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0.jpg
+      - name: 七つの海を渡る风のように
+        artist: --
+        url: https://cdn.jsdelivr.net/gh/AyLax/cdn/audio/page.mp3
+        cover: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/avatar/kurumi.jpeg
     meting:
-      enable: true
-      id: 308168565
+      enable: false
+      id: 5010503307
       server: netease
       type: playlist
 
