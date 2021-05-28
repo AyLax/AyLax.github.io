@@ -1,4 +1,4 @@
-# page.s
+# page.hex
 
 ### Develop
 
@@ -11,3 +11,9 @@ git submodule update
 npm install
 hexo server
 ```
+
+### Web Site
+
+[aylax.github.io](https://aylax.github.io/)
+
+[aylax.page.hex](https://aylax-page-hex.vercel.app/)
