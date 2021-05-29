@@ -396,11 +396,11 @@ katex:
 
 # plugins
 aplayer:
-  global: true
+  global: false
   meting: true
   # https://github.com/metowolf/MetingJS/tree/v1.2#option
   widget:
-    enable: true
+    enable: false
     autoplay: false
     theme: "#c46a6a"
     loop: all
@@ -417,7 +417,7 @@ aplayer:
         url: https://cdn.jsdelivr.net/gh/AyLax/cdn/audio/page.mp3
         cover: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/avatar/kurumi.jpeg
     meting:
-      enable: false
+      enable: true
       id: 5010503307
       server: netease
       type: playlist
