@@ -24,7 +24,7 @@ favicon: /page.ico
 # Posts / Categories / Tags in sidebar.
 sidebar:
   src: /js/sidebar.js
-  bg_image: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/bg/timing.webp
+  bg_image: https://cdn.jsdelivr.net/gh/aylax/cdn/img/bg/timing.webp
   bg_position: bottom 1rem center
   tagcloud:
     enable: false
@@ -46,7 +46,7 @@ social:
     icon: icon-rss-line
     color: orange
   - name: GitHub
-    link: https://github.com/AyLax
+    link: https://github.com/aylax
     icon: icon-github-line
     color: "#6e5494"
   - name: E-Mail
@@ -201,9 +201,9 @@ trianglify:
 
 cursor:
   enable: true
-  default: https://cdn.jsdelivr.net/gh/AyLax/cdn/css/md/cursor/pointer.cur
-  pointer: https://cdn.jsdelivr.net/gh/AyLax/cdn/css/md/cursor/link.cur
-  text: https://cdn.jsdelivr.net/gh/AyLax/cdn/css/md/cursor/text.cur
+  default: https://cdn.jsdelivr.net/gh/aylax/cdn/css/md/cursor/pointer.cur
+  pointer: https://cdn.jsdelivr.net/gh/aylax/cdn/css/md/cursor/link.cur
+  text: https://cdn.jsdelivr.net/gh/aylax/cdn/css/md/cursor/text.cur
 
 smoothScroll: true
 
@@ -215,8 +215,8 @@ scrollreveal:
 
 bg_image:
   enable: true
-  url: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/bg/page_light.jpeg # recomend image related to your mode
-  dark: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/bg/page_dark.jpeg
+  url: https://cdn.jsdelivr.net/gh/aylax/cdn/img/bg/page_light.jpeg # recomend image related to your mode
+  dark: https://cdn.jsdelivr.net/gh/aylax/cdn/img/bg/page_dark.jpeg
   # blur: 30px
   opacity: 1
 
@@ -230,15 +230,15 @@ reward:
   # url: https://github.com/YunYouJun/yunyoujun.github.io/issues/96
   methods:
     - name: 支付宝
-      path: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/qr/none.jpeg
+      path: https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg
       color: "#00A3EE"
       icon: icon-alipay-line
     - name: QQ 支付
-      path: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/qr/none.jpeg
+      path: https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg
       color: "#12B7F5"
       icon: icon-qq-line
     - name: 微信支付
-      path: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/qr/none.jpeg
+      path: https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg
       color: "#2DC100"
       icon: icon-wechat-pay-line
 
@@ -414,8 +414,8 @@ aplayer:
     audio:
       - name: 七つの海を渡る风のように
         artist: --
-        url: https://cdn.jsdelivr.net/gh/AyLax/cdn/audio/page.mp3
-        cover: https://cdn.jsdelivr.net/gh/AyLax/cdn/img/avatar/kurumi.jpeg
+        url: https://cdn.jsdelivr.net/gh/aylax/cdn/audio/page.mp3
+        cover: https://cdn.jsdelivr.net/gh/aylax/cdn/img/avatar/kurumi.jpeg
     meting:
       enable: true
       id: 5010503307
