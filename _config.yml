@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Book
+title: book
 subtitle: ''
 description: ''
 keywords: 
@@ -103,3 +103,10 @@ theme: yun
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+
+aplayer:
+  meting: true
+  cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.js
+  style_cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.css
+  meting_cdn: https://cdn.jsdelivr.net/npm/meting@1/dist/Meting.min.js

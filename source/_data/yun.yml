@@ -70,7 +70,7 @@ pages:
 # pages
 # -------
 # friend
-anonymous_image: https://cdn.jsdelivr.net/gh/Aylax/cdn/img/avatar/none.jpeg
+anonymous_image: https://cdn.jsdelivr.net/gh/aylax/cdn/img/avatar/none.jpeg
 
 
 # Sidebar Avatar
@@ -103,9 +103,9 @@ menu:
       path: /tags/
       icon: icon-price-tag-3-line
   custom:
-    title: about
-    path: /about
-    icon: icon-cloud-line
+    title: site
+    path: /about/site
+    icon: icon-clipboard-line
 
 # archive
 archive:
@@ -259,14 +259,10 @@ creative_commons:
 # Go to https://www.addthis.com/dashboard to customize your tools.
 # add_this_id:
 
-# Post edit
-# Dependencies: https://github.com/hexojs/hexo-deployer-git
-post_edit:
-  enable: false
-  url: https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name # Link for view source.
 
 # Footer Settings
 # --------------- footer:
+footer:
   since: 2021
 
   # Icon between year and copyright info.
@@ -290,22 +286,11 @@ post_edit:
     enable: false
     # icp: 苏ICP备xxxxxxxx号
 
-  live_time:
-    enable: false
-    prefix: 本博客已萌萌哒地运行
-    suffix: (●'◡'●)
-    start_time: "2021-06-01T00:00:00"
-
-  # Display support
-  # support:
-  #   enable: true
-  #   title: 又拍云
-  #   link: https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral
-  #   logo: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/logo/upyun-logo.png
-  #   prefix: 本网站由
-  #   suffix: 提供 CDN 加速
-  # Any custom text can be defined here.
-  # custom_text: Hosted by <a href="https://pages.coding.me" rel="noopener" target="_blank">Coding Pages</a>
+  support:
+    enable: true
+    title: YouPaiYun
+    link: https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral
+    logo: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/logo/upyun-logo.png
 
 # Post meta display settings
 post_meta:
@@ -369,10 +354,6 @@ wordcount:
 
 engine_search:
   enable: false
-  href: "https://www.google.com/search?q=site:"
-  # href: "https://www.baidu.com/s?wd=site:"
-  # href: "https://www.bing.com/search?q=site:"
-  domain: yunyoujun.cn
 
 # https://github.com/wzpan/hexo-generator-search
 local_search:
@@ -382,9 +363,6 @@ local_search:
 # https://github.com/oncletom/hexo-algolia
 algolia_search:
   enable: false
-  src: /js/search/algolia-search.js
-  hits:
-    per_page: 8 # the number of search results per page
 
 
 # That is it only render those page which has `katex: true` in Front-matter.
@@ -394,33 +372,6 @@ katex:
   copy_tex: true
   global: false
 
-# plugins
-aplayer:
-  global: false
-  meting: true
-  # https://github.com/metowolf/MetingJS/tree/v1.2#option
-  widget:
-    enable: false
-    autoplay: false
-    theme: "#c46a6a"
-    loop: all
-    order: list
-    preload: auto
-    volume: 0.12
-    mutex: true
-    lrcType: 0
-    listFolded: false
-    listMaxHeight: 340px
-    audio:
-      - name: 七つの海を渡る风のように
-        artist: --
-        url: https://cdn.jsdelivr.net/gh/aylax/cdn/audio/page.mp3
-        cover: https://cdn.jsdelivr.net/gh/aylax/cdn/img/avatar/kurumi.jpeg
-    meting:
-      enable: true
-      id: 5010503307
-      server: netease
-      type: playlist
 
 # special
 mourn:
@@ -433,6 +384,32 @@ mourn:
 # https://ziyuan.baidu.com/linksubmit/index
 baidu_push: false
 
+aplayer:
+  global: false
+  meting: true
+  # https://github.com/metowolf/MetingJS/tree/v1.2#option
+  widget:
+    enable: false
+    autoplay: false
+    # theme: "#2980b9"
+    loop: all
+    order: list
+    preload: auto
+    volume: 0.24
+    mutex: true
+    lrcType: 0
+    listFolded: false
+    listMaxHeight: 340px
+    audio:
+      - name: 七つの海を渡る风のように
+        artist: --
+        url: https://cdn.jsdelivr.net/gh/aylax/cdn/audio/可曾记得爱_饭岛真理.mp3
+        cover: https://cdn.jsdelivr.net/gh/aylax/cdn/img/avatar/kurumi.jpeg
+    meting:
+      enable: true
+      id: 5010503307
+      server: netease
+      type: playlist
 # slide
 slide:
   separator: ---
