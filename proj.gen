@@ -1,0 +1,2 @@
+#!/bin/bash
+tree -aF -I 'node_modules|public|.git|themes' > .proj
