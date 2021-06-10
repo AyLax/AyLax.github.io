@@ -31,8 +31,13 @@
     │   └── index.md
     ├── page.ico
     ├── _posts/
-    │   └── hello-world.md
+    │   ├── essay/
+    │   │   └── essay__set_sail.md
+    │   └── program/
+    │       ├── program__arch_on_ssd.md
+    │       ├── program__linux_command.md
+    │       └── program__write_os_on_risc.md
     └── tags/
         └── index.md
 
-10 directories, 25 files
+12 directories, 28 files
