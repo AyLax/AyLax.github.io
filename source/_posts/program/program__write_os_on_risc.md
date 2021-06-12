@@ -4,6 +4,7 @@ date: 2021-06-01 06:00:00
 updated: 2021-06-01 06:00:00
 tags:
   - linux
+  - rust
 categories: 
   - program
 ---
@@ -12,5 +13,4 @@ categories:
 
 <!-- more -->
 
-
-
+待补充....
