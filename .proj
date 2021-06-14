@@ -1,43 +1,45 @@
 .
-├── _config.landscape.yml
-├── _config.yml
-├── db.json
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
 ├── .gitignore
 ├── .gitmodules
-├── Makefile
-├── package.json
-├── package-lock.json
 ├── .proj
-├── proj.gen
+├── LICENSE
+├── Makefile
 ├── README.md
+├── _config.landscape.yml
+├── _config.yml
+├── db.json
+├── package-lock.json
+├── package.json
+├── proj.gen
 ├── scaffolds/
 │   ├── draft.md
 │   ├── page.md
 │   └── post.md
 └── source/
     ├── 404.md
+    ├── _data/
+    │   └── yun.yml
+    ├── _posts/
+    │   ├── essay/
+    │   │   └── essay__set_sail.md
+    │   └── program/
+    │       ├── program__arch_on_ssd.md
+    │       ├── program__how_to_use_git.md
+    │       ├── program__linux_command.md
+    │       └── program__write_os_on_risc.md
     ├── about/
     │   ├── index.md
     │   └── site.md
     ├── avatar.jpeg
     ├── categories/
     │   └── index.md
-    ├── _data/
-    │   └── yun.yml
     ├── links/
     │   └── index.md
     ├── page.ico
-    ├── _posts/
-    │   ├── essay/
-    │   │   └── essay__set_sail.md
-    │   └── program/
-    │       ├── program__arch_on_ssd.md
-    │       ├── program__linux_command.md
-    │       └── program__write_os_on_risc.md
     └── tags/
         └── index.md
 
-12 directories, 28 files
+12 directories, 30 files
