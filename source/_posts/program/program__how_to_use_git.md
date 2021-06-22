@@ -49,8 +49,10 @@ ssh -T git@github.com
 ## git 修改commit时间
 
 ```bash
-# 时间格式参考
-date -R # date -R -v-29d => 当前日期减去29天
+## => 当前日期减去29天
+# [Mac]   date -R -v-29d
+# [Linux] date -R -d "$dataset_date - 29 days" 
+
 git commit --date="Tue, 13 Jul 2021 11:13:57 +0800" -am "commit message"
 ```
 
