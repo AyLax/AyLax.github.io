@@ -26,6 +26,8 @@
     │   ├── essay/
     │   │   └── essay__set_sail.md
     │   └── program/
+    │       ├── hask.fn.d/
+    │       │   └── program__haskell_in_my_life.md
     │       ├── program__arch_on_ssd.md
     │       ├── program__how_to_use_git.md
     │       ├── program__linux_command.md
@@ -42,4 +44,4 @@
     └── tags/
         └── index.md
 
-12 directories, 30 files
+13 directories, 31 files
