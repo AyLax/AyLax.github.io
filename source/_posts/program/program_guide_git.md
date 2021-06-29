@@ -1,7 +1,7 @@
 ---
-title: 使用 git 的正确姿势
+title: Git 使用指南
 date: 2021-06-14 06:00:00
-updated: 2021-06-14 06:00:00
+updated: 2021-06-29 06:00:00
 tags:
   - git
 categories: 
