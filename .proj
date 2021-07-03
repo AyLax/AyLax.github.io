@@ -1,48 +1,51 @@
 .
-├── _config.landscape.yml
-├── _config.yml
-├── db.json
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
 ├── .gitignore
 ├── .gitmodules
+├── .proj
 ├── LICENSE
 ├── Makefile
-├── package.json
-├── package-lock.json
-├── .proj
-├── proj.gen
 ├── README.md
+├── _config.landscape.yml
+├── _config.yml
+├── db.json
+├── package-lock.json
+├── package.json
+├── proj.gen
 ├── scaffolds/
 │   ├── draft.md
 │   ├── page.md
 │   └── post.md
 └── source/
     ├── 404.md
+    ├── _data/
+    │   └── yun.yml
+    ├── _posts/
+    │   ├── essay/
+    │   │   ├── essay__set_sail.md
+    │   │   └── essay__shot_a_peotry.md
+    │   └── program/
+    │       ├── devel.d/
+    │       │   ├── program__dev_editor.md
+    │       │   └── program__dev_os_on_risc.md
+    │       └── guide.d/
+    │           ├── program__guide_arch_on_ssd.md
+    │           ├── program__guide_git.md
+    │           ├── program__guide_haskell.md
+    │           ├── program__guide_linux.md
+    │           └── program__guide_markdown.md
     ├── about/
     │   ├── index.md
     │   └── site.md
     ├── avatar.jpeg
     ├── categories/
     │   └── index.md
-    ├── _data/
-    │   └── yun.yml
     ├── links/
     │   └── index.md
     ├── page.ico
-    ├── _posts/
-    │   ├── essay/
-    │   │   ├── essay__set_sail.md
-    │   │   └── essay__shot_a_peotry.md
-    │   └── program/
-    │       ├── hask.fn.d/
-    │       │   └── program__haskell_in_my_life.md
-    │       ├── program__arch_on_ssd.md
-    │       ├── program__how_to_use_git.md
-    │       ├── program__linux_command.md
-    │       └── program__write_os_on_risc.md
     └── tags/
         └── index.md
 
-13 directories, 32 files
+14 directories, 34 files
