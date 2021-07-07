@@ -41,3 +41,18 @@ grep -l "first" *.txt # 列出包含 (first) 的文件
 grep -L "first" *.txt # 列出不包含 (first) 的文件
 ```
 
+### sed
+
+```bash
+# sed : Stream Editor 流编辑器
+# aaa 替换为bbb
+echo "aaa" | sed "s@a@b@g" # >: bbb
+# 显示 test 文件的第 10 行到第 20 行的内容
+sed -n '10,20p' test
+# 删除每行最后的两个字符
+sed 's/..$//' test
+# 删除每行开头的两个字符
+sed 's/..//' test
+```
+
+
