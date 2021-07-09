@@ -72,3 +72,11 @@ who|cut -b 3
 who|cut -b 3-5,8
 ```
 
+### alias
+```bash
+# alias: 定义别名
+alias # 列出所有别名
+alias vi # 列出vi的别名
+unalias vi # 取消vi别名
+unalias -a # 取消所有别名
+```
