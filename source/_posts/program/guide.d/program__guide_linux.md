@@ -15,6 +15,19 @@ categories:
 
 ## commands
 
+
+### cp
+
+```bash
+# cp: 复制文件或目录
+# cp [options] src dst
+cp -r src dst # 将src目录下内容递归复制到dst
+cp -a src dst # 复制时保留 链接, 文件属性
+cp -f scr dst # 覆盖已存在文件时不做提示
+cp -i scr dst # 覆盖已存在文件时作出提示
+
+```
+
 ### tree
 
 ```bash
@@ -87,3 +100,4 @@ unalias -a # 取消所有别名
 # history: 命令行输入历史
 history
 ```
+
