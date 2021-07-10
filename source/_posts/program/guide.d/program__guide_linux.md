@@ -80,3 +80,10 @@ alias vi # 列出vi的别名
 unalias vi # 取消vi别名
 unalias -a # 取消所有别名
 ```
+
+
+### history
+```bash
+# history: 命令行输入历史
+history
+```
