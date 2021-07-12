@@ -1,16 +1,18 @@
 # page.hex
 
-### Develop
+### dependency
 
-```
-npm install hexo-cli -g
-npm install hexo-render-pug hexo-renderer-stylus --save
-git submodule init
-git submodule update
-npm install
-hexo server
+require node && npm && make
+
+### install
+
+```bash
+make pre # install node packages
+make run # run it on local env
+make gen # gen html pages
 ```
 
-### Web Site
+
+### web site
 
 [aylax.github.io](https://aylax.github.io/)
