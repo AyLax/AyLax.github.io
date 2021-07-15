@@ -28,6 +28,22 @@ cp -i scr dst # 覆盖已存在文件时作出提示
 
 ```
 
+### scp
+```bash
+# scp: scurity copy, 远程拷贝
+# options:
+## -p: 保留原文件的修改时间, 访问时间和访问权限。
+## -r: 递归复制整个目录。
+## -P: 指定端口号
+
+# 本地复制到远程
+scp -r /home/path uname@ip:/home/path
+
+# 远程复制到本地
+scp -r uname@ip:/home/path /home/path
+
+```
+
 ### tree
 
 ```bash
