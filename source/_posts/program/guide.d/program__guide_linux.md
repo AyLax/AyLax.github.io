@@ -29,6 +29,7 @@ cp -i scr dst # 覆盖已存在文件时作出提示
 ```
 
 ### scp
+
 ```bash
 # scp: scurity copy, 远程拷贝
 # options:
@@ -44,6 +45,32 @@ scp -r uname@ip:/home/path /home/path
 
 ```
 
+
+### tar
+
+```bash
+# tar: tape archive, 归档
+# tar [-ABcdgGhiklmMoOpPrRsStuUvwWxzZ]
+## [-b <区块数目>][-C <目的目录>][-f <备份文件>][-F <Script文件>]
+## [-K <文件>][-L <媒体容量>][-N <日期时间>][-T <范本文件>][-V <卷册名称>]
+## [-X <范本文件>][-<设备编号><存储密度>][--after-date=<日期时间>]
+## [--atime-preserve][--backuup=<备份方式>][--checkpoint][--concatenate]
+## [--confirmation][--delete][--exclude=<范本样式>][--force-local]
+## [--group=<群组名称>][--help][--ignore-failed-read]
+## [--new-volume-script=<Script文件>][--newer-mtime][--no-recursion][--null]
+## [--numeric-owner][--owner=<用户名称>][--posix][--erve][--preserve-order]
+## [--preserve-permissions][--record-size=<区块数目>]
+## [--recursive-unlink][--remove-files][--rsh-command=<执行指令>]
+## [--same-owner][--suffix=<备份字尾字符串>][--totals]
+## [--use-compress-program=<执行指令>][--version]
+## [--volno-file=<编号文件>][文件或目录...]
+
+tar -czvf ab.tar.gz a b # 压缩 ab 文件
+tar -tzvf test.tar.gz   # 列出压缩文件
+tar -xzvf test.tar.gz   # 解压压缩文件
+```
+
+
 ### tree
 
 ```bash
@@ -52,6 +79,7 @@ tree -a # 同时展示隐藏文件
 tree -F # 通过"*","/","=","@","|", 标记文件或目录的类型
 tree -I '.cargo|.git' # 排除匹配的文件或目录
 ```
+
 
 ### grep
 
@@ -69,6 +97,7 @@ grep -i "me" /etc/passwd # 搜索时不区分大小写
 grep -l "first" *.txt # 列出包含 (first) 的文件
 grep -L "first" *.txt # 列出不包含 (first) 的文件
 ```
+
 
 ### sed
 
@@ -100,6 +129,7 @@ who|cut -b 3-5,8
 who|cut -b 3
 who|cut -b 3-5,8
 ```
+
 
 ### alias
 ```bash
