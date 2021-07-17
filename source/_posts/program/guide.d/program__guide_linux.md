@@ -132,6 +132,7 @@ who|cut -b 3-5,8
 
 
 ### alias
+
 ```bash
 # alias: 定义别名
 alias # 列出所有别名
@@ -142,8 +143,27 @@ unalias -a # 取消所有别名
 
 
 ### history
+
 ```bash
 # history: 命令行输入历史
 history
+```
+
+
+### top
+
+```bash
+# top: 实时显示进程的动态。
+# options [-] [d delay] [q] [c] [S] [s] [i] [n] [b]
+## d : 改变显示的更新速度，或是在交谈式指令列( interactive command)按 s
+## q : 无延迟的显示速度，当有superuser 的权限，则 top 将会以最高的优先序执行
+## c : 切换显示模式 A.只显示执行档的名称 / B.显示完整的路径与名称
+## S : 累积模式，会将己完成或消失的子行程的 CPU time 累积起来
+## s : 安全模式，将交谈式指令取消, 避免潜在的危机
+## i : 不显示任何闲置 (idle) 或无用 (zombie) 的行程
+## n : 更新的次数，完成后将会退出 top
+## b : 批次档模式，搭配 "n" 参数一起使用，可以用来将 top 的结果输出到档案内
+
+top
 ```
 
