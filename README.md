@@ -14,5 +14,3 @@ hexo server
 ### Web Site
 
 [aylax.github.io](https://aylax.github.io/)
-
-[aylax.page.hex](https://aylax-page-hex-87q9puusq-aylax.vercel.app/)
