@@ -1,11 +1,11 @@
 ---
-title: set sail
+title: 泛泛之辈
 date: 2021-06-01 06:00:00
 updated: 2021-06-01 06:00:00
 tags: 
-  - essay
+  - dream
 categories: 
   - essay
 ---
 
-此时此刻，扬帆起航!
+<center> 空谈 </center>
