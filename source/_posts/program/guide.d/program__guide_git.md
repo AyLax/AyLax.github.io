@@ -12,6 +12,23 @@ FAQ for Git.
 <!-- more -->
 
 
+## 完整的git提交流程
+
+```bash
+# 克隆或初始化一个git仓库
+git clone git@user.repo.git # or: git init repo
+
+# fork一个开发分支, 并在上面编写代码
+git checkout -b branch_name
+
+# 加入版本库, 并提交
+git add . && git commit
+
+# 推送到git-repo.server
+git push # Then: Create MR -> Code Review -> Merge
+```
+
+
 ## 配置多个ssh Keys
 
 ```bash
