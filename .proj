@@ -23,7 +23,7 @@
     ├── about/
     │   ├── index.md
     │   └── site.md
-    ├── avatar.jpeg
+    ├── avatar
     ├── categories/
     │   └── index.md
     ├── _data/
@@ -32,6 +32,8 @@
     │   └── index.md
     ├── page.ico
     ├── _posts/
+    │   ├── agthms/
+    │   │   └── agthms__basic.md
     │   ├── essay/
     │   │   ├── essay__set_sail.md
     │   │   └── essay__shot_a_peotry.md
@@ -43,9 +45,10 @@
     │           ├── program__guide_arch_on_ssd.md
     │           ├── program__guide_git.md
     │           ├── program__guide_haskell.md
+    │           ├── program__guide_k8s.md
     │           ├── program__guide_linux.md
     │           └── program__guide_markdown.md
     └── tags/
         └── index.md
 
-14 directories, 34 files
+15 directories, 36 files
