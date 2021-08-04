@@ -28,6 +28,18 @@ git add . && git commit
 git push # Then: Create MR -> Code Review -> Merge
 ```
 
+## 撤回错误的分支提交
+
+```bash
+## 如果提交到错误的branch 例如直接提交到master
+git reset --soft HEAD^ # 软撤销，保留修改的代码
+git reset --mixed # 将提交的代码撤回到 git add . 之前
+git stash # 暂存代码
+git checkout develop # 切换到develop 
+git pull  && git checkout -b new_branch # 创建新分支 
+git stash pop # 弹出暂存代码
+```
+
 
 ## 配置多个ssh Keys
 
