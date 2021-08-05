@@ -1,27 +1,34 @@
 .
+├── _config.landscape.yml
+├── _config.yml
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
 ├── .gitignore
 ├── .gitmodules
-├── .proj
 ├── LICENSE
 ├── Makefile
-├── README.md
-├── _config.landscape.yml
-├── _config.yml
-├── db.json
-├── package-lock.json
 ├── package.json
+├── .proj
 ├── proj.gen
+├── README.md
 ├── scaffolds/
 │   ├── draft.md
 │   ├── page.md
 │   └── post.md
 └── source/
     ├── 404.md
+    ├── about/
+    │   ├── index.md
+    │   └── site.md
+    ├── avatar
+    ├── categories/
+    │   └── index.md
     ├── _data/
     │   └── yun.yml
+    ├── links/
+    │   └── index.md
+    ├── page.ico
     ├── _posts/
     │   ├── agthms/
     │   │   └── agthms__basic.md
@@ -39,16 +46,7 @@
     │           ├── program__guide_k8s.md
     │           ├── program__guide_linux.md
     │           └── program__guide_markdown.md
-    ├── about/
-    │   ├── index.md
-    │   └── site.md
-    ├── avatar
-    ├── categories/
-    │   └── index.md
-    ├── links/
-    │   └── index.md
-    ├── page.ico
     └── tags/
         └── index.md
 
-15 directories, 36 files
+15 directories, 34 files
