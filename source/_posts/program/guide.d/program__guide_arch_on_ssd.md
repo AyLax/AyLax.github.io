@@ -25,7 +25,7 @@ categories:
 
 众多的linux发行版里，我选择了 arch-linux, 无他，唯系统简洁，社区友好。
 
-安装步骤和平时的安装方式 [步骤参考👉](https://github.com/aylax/dothub.d/blob/master/data.d/Bash/arch.ins) 几乎一致。只有一点小小的不同
+安装步骤和平时的安装方式 [步骤参考👉](https://github.com/aylax/dothub.d/blob/master/data.d/Bash/make-arch-os.doc) 几乎一致。只有一点小小的不同
 
 
 ```bash
