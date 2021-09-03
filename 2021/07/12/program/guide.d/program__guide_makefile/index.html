@@ -1,0 +1,848 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="aylax"><meta name="copyright" content="aylax"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>君は Makefile が本当に上手(です) | book</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.24/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_j5gk85dg4pf.js" async></script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/page.ico"><link rel="mask-icon" href="/page.ico" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"aylax.github.io","root":"/","title":"朝花夕拾","version":"1.6.1","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.jsdelivr.net/gh/aylax/cdn/img/avatar/none.jpeg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><link rel="alternate" href="/atom.xml" title="book" type="application/atom+xml"><meta name="description" content="Makefile Tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="君は Makefile が本当に上手(です)">
+<meta property="og:url" content="https://aylax.github.io/2021/07/12/program/guide.d/program__guide_makefile/index.html">
+<meta property="og:site_name" content="book">
+<meta property="og:description" content="Makefile Tutorial">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-12T00:00:00.000Z">
+<meta property="article:author" content="aylax">
+<meta property="article:tag" content="makefile">
+<meta name="twitter:card" content="summary"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="aylax"><img width="96" loading="lazy" src="/avatar" alt="aylax"></a><div class="site-author-name"><a href="/about/">aylax</a></div><a class="site-name" href="/about/site.html">book</a><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">12</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">3</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">11</span></a></div><a class="site-state-item hty-icon-button" href="/about/site" title="site"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-clipboard-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="/atom.xml" title="RSS" target="_blank" style="color:orange"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-rss-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/aylax" title="GitHub" target="_blank" style="color:#6e5494"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:zhoubye@foxmail.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="Other" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Getting-Started"><span class="toc-number">1.</span> <span class="toc-text">Getting Started</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-do-Makefiles-exist"><span class="toc-number">1.1.</span> <span class="toc-text">Why do Makefiles exist?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-alternatives-are-there-to-Make"><span class="toc-number">1.2.</span> <span class="toc-text">What alternatives are there to Make?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Running-the-Examples"><span class="toc-number">1.3.</span> <span class="toc-text">Running the Examples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Makefile-Syntax"><span class="toc-number">1.4.</span> <span class="toc-text">Makefile Syntax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Beginner-Examples"><span class="toc-number">1.5.</span> <span class="toc-text">Beginner Examples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Variables"><span class="toc-number">1.6.</span> <span class="toc-text">Variables</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Targets"><span class="toc-number">2.</span> <span class="toc-text">Targets</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-all-target"><span class="toc-number">2.1.</span> <span class="toc-text">The all target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multiple-targets"><span class="toc-number">2.2.</span> <span class="toc-text">Multiple targets</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Automatic-Variables-and-Wildcards"><span class="toc-number">3.</span> <span class="toc-text">Automatic Variables and Wildcards</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Wildcard"><span class="toc-number">3.1.</span> <span class="toc-text">* Wildcard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wildcard-1"><span class="toc-number">3.2.</span> <span class="toc-text">% Wildcard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Automatic-Variables"><span class="toc-number">3.3.</span> <span class="toc-text">Automatic Variables</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fancy-Rules"><span class="toc-number">4.</span> <span class="toc-text">Fancy Rules</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Static-Pattern-Rules"><span class="toc-number">4.1.</span> <span class="toc-text">Static Pattern Rules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Static-Pattern-Rules-and-Filter"><span class="toc-number">4.2.</span> <span class="toc-text">Static Pattern Rules and Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implicit-Rules"><span class="toc-number">4.3.</span> <span class="toc-text">Implicit Rules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-Rules"><span class="toc-number">4.4.</span> <span class="toc-text">Pattern Rules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Double-Colon-Rules"><span class="toc-number">4.5.</span> <span class="toc-text">Double-Colon Rules</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Commands-and-execution"><span class="toc-number">5.</span> <span class="toc-text">Commands and execution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Echoing-Silencing"><span class="toc-number">5.1.</span> <span class="toc-text">Command Echoing&#x2F;Silencing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Execution"><span class="toc-number">5.2.</span> <span class="toc-text">Command Execution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Default-Shell"><span class="toc-number">5.3.</span> <span class="toc-text">Default Shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Error-handling-with-k-i-and"><span class="toc-number">5.4.</span> <span class="toc-text">Error handling with -k, -i, and -</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Interrupting-or-killing-make"><span class="toc-number">5.5.</span> <span class="toc-text">Interrupting or killing make</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Recursive-use-of-make"><span class="toc-number">5.6.</span> <span class="toc-text">Recursive use of make</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-export-for-recursive-make"><span class="toc-number">5.7.</span> <span class="toc-text">Use export for recursive make</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Arguments-to-make"><span class="toc-number">5.8.</span> <span class="toc-text">Arguments to make</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Variables-Pt-2"><span class="toc-number">6.</span> <span class="toc-text">Variables Pt. 2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flavors-and-modification"><span class="toc-number">6.1.</span> <span class="toc-text">Flavors and modification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-line-arguments-and-override"><span class="toc-number">6.2.</span> <span class="toc-text">Command line arguments and override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List-of-commands-and-define"><span class="toc-number">6.3.</span> <span class="toc-text">List of commands and define</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target-specific-variables"><span class="toc-number">6.4.</span> <span class="toc-text">Target-specific variables</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern-specific-variables"><span class="toc-number">6.5.</span> <span class="toc-text">Pattern-specific variables</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conditional-part-of-Makefiles"><span class="toc-number">7.</span> <span class="toc-text">Conditional part of Makefiles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Conditional-if-else"><span class="toc-number">7.1.</span> <span class="toc-text">Conditional if&#x2F;else</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Check-if-a-variable-is-empty"><span class="toc-number">7.2.</span> <span class="toc-text">Check if a variable is empty</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Check-if-a-variable-is-defined"><span class="toc-number">7.3.</span> <span class="toc-text">Check if a variable is defined</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#makeflags"><span class="toc-number">7.4.</span> <span class="toc-text">$(makeflags)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Functions"><span class="toc-number">8.</span> <span class="toc-text">Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#First-Functions"><span class="toc-number">8.1.</span> <span class="toc-text">First Functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-Substitution"><span class="toc-number">8.2.</span> <span class="toc-text">String Substitution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-foreach-function"><span class="toc-number">8.3.</span> <span class="toc-text">The foreach function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-if-function"><span class="toc-number">8.4.</span> <span class="toc-text">The if function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-call-function"><span class="toc-number">8.5.</span> <span class="toc-text">The call function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-shell-function"><span class="toc-number">8.6.</span> <span class="toc-text">The shell function</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Other-Features"><span class="toc-number">9.</span> <span class="toc-text">Other Features</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Include-Makefiles"><span class="toc-number">9.1.</span> <span class="toc-text">Include Makefiles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-vpath-Directive"><span class="toc-number">9.2.</span> <span class="toc-text">The vpath Directive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multiline"><span class="toc-number">9.3.</span> <span class="toc-text">Multiline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phony"><span class="toc-number">9.4.</span> <span class="toc-text">.phony</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#delete-on-error"><span class="toc-number">9.5.</span> <span class="toc-text">.delete_on_error</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Makefile-Cookbook"><span class="toc-number">10.</span> <span class="toc-text">Makefile Cookbook</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://aylax.github.io/2021/07/12/program/guide.d/program__guide_makefile/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="aylax"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="book"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">君は Makefile が本当に上手(です)</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="Created: 2021-07-12 08:00:00" itemprop="dateCreated datePublished" datetime="2021-07-12T08:00:00+08:00">2021-07-12</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="Word count in article"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="Word count in article">4.1k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="Reading time"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-timer-line"></use></svg></span> <span title="Reading time">25m</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/program/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">program</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/makefile/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">makefile</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><p>Makefile Tutorial</p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://makefiletutorial.com/">Page Reference Page</a></p>
+<h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h2 id="Why-do-Makefiles-exist"><a href="#Why-do-Makefiles-exist" class="headerlink" title="Why do Makefiles exist?"></a>Why do Makefiles exist?</h2><p>Makefiles are used to help decide which parts of a large program need to be recompiled. In the vast majority of cases, C or C++ files are compiled. Other languages typically have their own tools that serve a similar purpose as Make. It can be used beyond programs too, when you need a series of instructions to run depending on what files have changed. This tutorial will focus on the C/C++ compilation use case.</p>
+<h2 id="What-alternatives-are-there-to-Make"><a href="#What-alternatives-are-there-to-Make" class="headerlink" title="What alternatives are there to Make?"></a>What alternatives are there to Make?</h2><p>Popular C/C++ alternative build systems are <a target="_blank" rel="noopener" href="https://scons.org/">SCons</a>, <a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a>, <a target="_blank" rel="noopener" href="https://bazel.build/">Bazel</a>, and <a target="_blank" rel="noopener" href="https://ninja-build.org/">Ninja</a>. Some code editors like <a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/">Microsoft Visual Studio</a> have their own built in build tools. For Java, there’s <a target="_blank" rel="noopener" href="https://ant.apache.org/">Ant</a>, <a target="_blank" rel="noopener" href="https://maven.apache.org/what-is-maven.html">Maven</a>, and <a target="_blank" rel="noopener" href="https://gradle.org/">Gradle</a>. Other languages like Go and Rust have their own build tools.</p>
+<p>Interpreted languages like Python, Ruby, and Javascript don’t require an analogue to Makefiles. The goal of Makefiles is to compile whatever files need to be compiled, based on what files have changed. But when files in interpreted languages change, nothing needs to get recompiled. When the program runs, the most recent version of the file is used.</p>
+<h2 id="Running-the-Examples"><a href="#Running-the-Examples" class="headerlink" title="Running the Examples"></a>Running the Examples</h2><p>To run these examples, you’ll need a terminal and “make” installed. For each example, put the contents in a file called <code>Makefile</code>, and in that directory run the command <code>make</code>. Let’s start with the simplest of Makefiles:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">hello</span><span class="token punctuation">:</span>
+	echo <span class="token string">"hello world"</span></code></pre>
+
+<p>Here is the output of running the above example:</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">make</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"hello world"</span>
+hello world</code></pre>
+
+<h2 id="Makefile-Syntax"><a href="#Makefile-Syntax" class="headerlink" title="Makefile Syntax"></a>Makefile Syntax</h2><p>A Makefile consists of a set of <em>rules</em>. A rule generally looks like this:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">targets</span><span class="token punctuation">:</span> prerequisites
+   command
+   command
+   command</code></pre>
+
+<ul>
+<li>The <em>targets</em> are file names, separated by spaces. Typically, there is only one per rule.</li>
+<li>The <em>commands</em> are a series of steps typically used to make the target(s). These <em>need to start with a tab character</em>, not spaces.</li>
+<li>The <em>prerequisites</em> are also file names, separated by spaces. These files need to exist before the commands for the target are run. These are also called <em>dependencies</em></li>
+</ul>
+<h2 id="Beginner-Examples"><a href="#Beginner-Examples" class="headerlink" title="Beginner Examples"></a>Beginner Examples</h2><p>The following Makefile has three separate <em>rules</em>. When you run <code>make blah</code> in the terminal, it will build a program called <code>blah</code> in a series of steps:</p>
+<ul>
+<li>Make is given <code>blah</code> as the target, so it first searches for this target</li>
+<li><code>blah</code> requires <code>blah.o</code>, so make searches for the <code>blah.o</code> target</li>
+<li><code>blah.o</code> requires <code>blah.c</code>, so make searches for the <code>blah.c</code> target</li>
+<li><code>blah.c</code> has no dependencies, so the <code>echo</code> command is run</li>
+<li>The <code>cc -c</code> command is then run, because all of the <code>blah.o</code> dependencies are finished</li>
+<li>The top <code>cc</code> command is run, because all the <code>blah</code> dependencies are finished</li>
+<li>That’s it: <code>blah</code> is a compiled c program</li>
+</ul>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">blah</span><span class="token punctuation">:</span> blah.o
+	cc blah.o -o blah <span class="token comment"># Runs third</span>
+
+<span class="token symbol">blah.o</span><span class="token punctuation">:</span> blah.c
+	cc -c blah.c -o blah.o <span class="token comment"># Runs second</span>
+
+<span class="token symbol">blah.c</span><span class="token punctuation">:</span>
+	echo <span class="token string">"int main() &#123; return 0; &#125;"</span> > blah.c <span class="token comment"># Runs first</span></code></pre>
+
+<p>This makefile has a single target, called <code>some_file</code>. The default target is the first target, so in this case <code>some_file</code> will run.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">some_file</span><span class="token punctuation">:</span>
+	echo <span class="token string">"This line will always print"</span></code></pre>
+
+<p>This file will make <code>some_file</code> the first time, and the second time notice it’s already made, resulting in <code>make: &#39;some_file&#39; is up to date.</code></p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">some_file</span><span class="token punctuation">:</span>
+	echo <span class="token string">"This line will only print once"</span>
+	touch some_file</code></pre>
+
+<p>Here, the target <code>some_file</code> “depends” on <code>other_file</code>. When we run <code>make</code>, the default target (<code>some_file</code>, since it’s first) will get called. It will first look at its list of <em>dependencies</em>, and if any of them are older, it will first run the targets for those dependencies, and then run itself. The second time this is run, neither target will run because both targets exist.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">some_file</span><span class="token punctuation">:</span> other_file
+	echo <span class="token string">"This will run second, because it depends on other_file"</span>
+	touch some_file
+
+<span class="token symbol">other_file</span><span class="token punctuation">:</span>
+	echo <span class="token string">"This will run first"</span>
+	touch other_file</code></pre>
+
+<p>This will always run both targets, because <code>some_file</code> depends on other_file, which is never created.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">some_file</span><span class="token punctuation">:</span> other_file
+	touch some_file
+
+<span class="token symbol">other_file</span><span class="token punctuation">:</span>
+	echo <span class="token string">"nothing"</span></code></pre>
+
+<p><code>clean</code> is often used as a target that removes the output of other targets, but it is not a special word in <code>make</code>.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">some_file</span><span class="token punctuation">:</span> 
+	touch some_file
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f some_file</code></pre>
+
+
+<h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><p>Variables can only be strings. Here’s an example of using them:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">files <span class="token operator">=</span> file1 file2
+<span class="token symbol">some_file</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>files<span class="token punctuation">)</span>
+	echo <span class="token string">"Look at this variable: "</span> <span class="token variable">$</span><span class="token punctuation">(</span>files<span class="token punctuation">)</span>
+	touch some_file
+
+<span class="token symbol">file1</span><span class="token punctuation">:</span>
+	touch file1
+<span class="token symbol">file2</span><span class="token punctuation">:</span>
+	touch file2
+ 
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f file1 file2 some_file</code></pre>
+
+<p>Reference variables using ${} or $()</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+x <span class="token operator">=</span> dude
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+	echo <span class="token variable">$</span><span class="token punctuation">&#123;</span>x<span class="token punctuation">&#125;</span>
+
+	<span class="token comment"># Bad practice, but works</span>
+	echo <span class="token variable">$x</span> </code></pre>
+
+<h1 id="Targets"><a href="#Targets" class="headerlink" title="Targets"></a>Targets</h1><h2 id="The-all-target"><a href="#The-all-target" class="headerlink" title="The all target"></a>The all target</h2><!--  (Section 4.4) -->
+<p>Making multiple targets and you want all of them to run? Make an <code>all</code> target.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">all</span><span class="token punctuation">:</span> one two three
+
+<span class="token symbol">one</span><span class="token punctuation">:</span>
+	touch one
+<span class="token symbol">two</span><span class="token punctuation">:</span>
+	touch two
+<span class="token symbol">three</span><span class="token punctuation">:</span>
+	touch three
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f one two three
+</code></pre>
+
+<h2 id="Multiple-targets"><a href="#Multiple-targets" class="headerlink" title="Multiple targets"></a>Multiple targets</h2><!--  (Section 4.8) -->
+<p>When there are multiple targets for a rule, the commands will be run for each target<br><code>$@</code> is an <a href="#automatic-variables">automatic variable</a> that contains the target name.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+<span class="token symbol">all</span><span class="token punctuation">:</span> f1.o f2.o
+
+<span class="token symbol">f1.o f2.o</span><span class="token punctuation">:</span>
+	echo <span class="token variable">$@</span>
+<span class="token comment"># Equivalent to:</span>
+<span class="token comment"># f1.o</span>
+<span class="token comment"># 	echo $@</span>
+<span class="token comment"># f2.o</span>
+<span class="token comment"># 	echo $@</span>
+</code></pre>
+
+<h1 id="Automatic-Variables-and-Wildcards"><a href="#Automatic-Variables-and-Wildcards" class="headerlink" title="Automatic Variables and Wildcards"></a>Automatic Variables and Wildcards</h1><h2 id="Wildcard"><a href="#Wildcard" class="headerlink" title="* Wildcard"></a>* Wildcard</h2><!--  (Section 4.2) -->
+<p>Both <code>*</code> and <code>%</code> are called wildcards in Make, but they mean entirely different things. <code>*</code> searches your filesystem for matching filenames. I suggest that you always wrap it in the <code>wildcard</code> function, because otherwise you may fall into a common pitfall described below. It’s oddly unhelpful and I find it more confusing than useful.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token comment"># Print out file information about every .c file</span>
+<span class="token symbol">print</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">wildcard</span> *.c<span class="token punctuation">)</span>
+	ls -la  <span class="token variable">$?</span></code></pre>
+
+<p><code>*</code> may be used in the target, prerequisites, or in the <code>wildcard</code> function.</p>
+<p>Danger: <code>*</code> may not be directly used in a variable definitions</p>
+<p>Danger: When <code>*</code> matches no files, it is left as it is (unless run in the <code>wildcard</code> function)</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">thing_wrong <span class="token operator">:=</span> *.o <span class="token comment"># Don't do this! '*' will not get expanded</span>
+thing_right <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">wildcard</span> *.o<span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> one two three four
+
+<span class="token comment"># Fails, because $(thing_wrong) is the string "*.o"</span>
+<span class="token symbol">one</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>thing_wrong<span class="token punctuation">)</span>
+
+<span class="token comment"># Stays as *.o if there are no files that match this pattern :(</span>
+<span class="token symbol">two</span><span class="token punctuation">:</span> *.o 
+
+<span class="token comment"># Works as you would expect! In this case, it does nothing.</span>
+<span class="token symbol">three</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>thing_right<span class="token punctuation">)</span>
+
+<span class="token comment"># Same as rule three</span>
+<span class="token symbol">four</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">wildcard</span> *.o<span class="token punctuation">)</span></code></pre>
+
+
+<h2 id="Wildcard-1"><a href="#Wildcard-1" class="headerlink" title="% Wildcard"></a>% Wildcard</h2><p><code>%</code> is really useful, but is somewhat confusing because of the variety of situations it can be used in.</p>
+<ul>
+<li>When used in “matching” mode, it matches one or more characters in a string. This match is called the stem.</li>
+<li>When used in “replacing” mode, it takes the stem that was matched and replaces that in a string.</li>
+<li><code>%</code> is most often used in rule definitions and in some specific functions.</li>
+</ul>
+<p>See these sections on examples of it being used:</p>
+<ul>
+<li><a href="#static-pattern-rules">Static Pattern Rules</a></li>
+<li><a href="#pattern-rules">Pattern Rules</a></li>
+<li><a href="#string-substitution">String Substitution</a></li>
+<li><a href="#the-vpath-directive">The vpath Directive</a></li>
+</ul>
+<h2 id="Automatic-Variables"><a href="#Automatic-Variables" class="headerlink" title="Automatic Variables"></a>Automatic Variables</h2><!--  (Section 10.5) -->
+<p>There are many <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">automatic variables</a>, but often only a few show up:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">hey</span><span class="token punctuation">:</span> one two
+	<span class="token comment"># Outputs "hey", since this is the first target</span>
+	echo <span class="token variable">$@</span>
+
+	<span class="token comment"># Outputs all prerequisites newer than the target</span>
+	echo <span class="token variable">$?</span>
+
+	<span class="token comment"># Outputs all prerequisites</span>
+	echo <span class="token variable">$^</span>
+
+	touch hey
+
+<span class="token symbol">one</span><span class="token punctuation">:</span>
+	touch one
+
+<span class="token symbol">two</span><span class="token punctuation">:</span>
+	touch two
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f hey one two
+</code></pre>
+
+<h1 id="Fancy-Rules"><a href="#Fancy-Rules" class="headerlink" title="Fancy Rules"></a>Fancy Rules</h1><h2 id="Static-Pattern-Rules"><a href="#Static-Pattern-Rules" class="headerlink" title="Static Pattern Rules"></a>Static Pattern Rules</h2><!--  (Section 4.10) -->
+<p>Make loves c compilation. And every time it expresses its love, things get confusing. Here’s the syntax for a new type of rule called a static pattern:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">targets ...</span><span class="token punctuation">:</span> target-pattern<span class="token punctuation">:</span> prereq-patterns ...
+   commands</code></pre>
+
+<p>The essence is that the given target is matched by the target-pattern (via a <code>%</code> wildcard). Whatever was matched is called the <em>stem</em>. The stem is then substituted into the prereq-pattern, to generate the target’s prereqs.</p>
+<p>A typical use case is to compile <code>.c</code> files into <code>.o</code> files. Here’s the <em>manual way</em>:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">objects <span class="token operator">=</span> foo.o bar.o all.o
+<span class="token symbol">all</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>objects<span class="token punctuation">)</span>
+
+<span class="token comment"># These files compile via implicit rules</span>
+<span class="token symbol">foo.o</span><span class="token punctuation">:</span> foo.c
+<span class="token symbol">bar.o</span><span class="token punctuation">:</span> bar.c
+<span class="token symbol">all.o</span><span class="token punctuation">:</span> all.c
+
+<span class="token symbol">all.c</span><span class="token punctuation">:</span>
+	echo <span class="token string">"int main() &#123; return 0; &#125;"</span> > all.c
+
+<span class="token symbol">%.c</span><span class="token punctuation">:</span>
+	touch <span class="token variable">$@</span>
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f *.c *.o all</code></pre>
+
+<p>Here’s the more <em>efficient way</em>, using a static pattern rule:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">objects <span class="token operator">=</span> foo.o bar.o all.o
+<span class="token symbol">all</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>objects<span class="token punctuation">)</span>
+
+<span class="token comment"># These files compile via implicit rules</span>
+<span class="token comment"># Syntax - targets ...: target-pattern: prereq-patterns ...</span>
+<span class="token comment"># In the case of the first target, foo.o, the target-pattern matches foo.o and sets the "stem" to be "foo".</span>
+<span class="token comment"># It then replaces the '%' in prereq-patterns with that stem</span>
+<span class="token symbol"><span class="token variable">$</span>(objects)</span><span class="token punctuation">:</span> %.o<span class="token punctuation">:</span> %.c
+
+<span class="token symbol">all.c</span><span class="token punctuation">:</span>
+	echo <span class="token string">"int main() &#123; return 0; &#125;"</span> > all.c
+
+<span class="token symbol">%.c</span><span class="token punctuation">:</span>
+	touch <span class="token variable">$@</span>
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f *.c *.o all</code></pre>
+
+<h2 id="Static-Pattern-Rules-and-Filter"><a href="#Static-Pattern-Rules-and-Filter" class="headerlink" title="Static Pattern Rules and Filter"></a>Static Pattern Rules and Filter</h2><!--  (Section 4.10) -->
+<p>While I introduce functions later on, I’ll forshadow what you can do with them. The <code>filter</code> function can be used in Static pattern rules to match the correct files. In this example, I made up the <code>.raw</code> and <code>.result</code> extensions.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+obj_files <span class="token operator">=</span> foo.result bar.o lose.o
+src_files <span class="token operator">=</span> foo.raw bar.c lose.c
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>obj_files<span class="token punctuation">)</span>
+
+<span class="token symbol"><span class="token variable">$</span>(filter %.o,<span class="token variable">$</span>(obj_files))</span><span class="token punctuation">:</span> %.o<span class="token punctuation">:</span> %.c
+	echo <span class="token string">"target: $@ prereq: $&lt;"</span>
+<span class="token symbol"><span class="token variable">$</span>(filter %.result,<span class="token variable">$</span>(obj_files))</span><span class="token punctuation">:</span> %.result<span class="token punctuation">:</span> %.raw
+	echo <span class="token string">"target: $@ prereq: $&lt;"</span> 
+
+<span class="token symbol">%.c %.raw</span><span class="token punctuation">:</span>
+	touch <span class="token variable">$@</span>
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f <span class="token variable">$</span><span class="token punctuation">(</span>src_files<span class="token punctuation">)</span></code></pre>
+
+
+<h2 id="Implicit-Rules"><a href="#Implicit-Rules" class="headerlink" title="Implicit Rules"></a>Implicit Rules</h2><!--  (Section 10) -->
+<p>Perhaps the most confusing part of make is the magic rules and variables that are made. Here’s a list of implicit rules:</p>
+<ul>
+<li>Compiling a C program: <code>n.o</code> is made automatically from <code>n.c</code> with a command of the form <code>$(CC) -c $(CPPFLAGS) $(CFLAGS)</code></li>
+<li>Compiling a C++ program: <code>n.o</code> is made automatically from <code>n.cc</code> or <code>n.cpp</code> with a command of the form <code>$(CXX) -c $(CPPFLAGS) $(CXXFLAGS)</code></li>
+<li>Linking a single object file: <code>n</code> is made automatically from <code>n.o</code> by running the command <code>$(CC) $(LDFLAGS) n.o $(LOADLIBES) $(LDLIBS)</code></li>
+</ul>
+<p>As such, the important variables used by implicit rules are:</p>
+<ul>
+<li><code>CC</code>: Program for compiling C programs; default cc</li>
+<li><code>CXX</code>: Program for compiling C++ programs; default G++</li>
+<li><code>CFLAGS</code>: Extra flags to give to the C compiler</li>
+<li><code>CXXFLAGS</code>: Extra flags to give to the C++ compiler</li>
+<li><code>CPPFLAGS</code>: Extra flags to give to the C preprocessor</li>
+<li><code>LDFLAGS</code>: Extra flags to give to compilers when they are supposed to invoke the linker</li>
+</ul>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">CC <span class="token operator">=</span> gcc <span class="token comment"># Flag for implicit rules</span>
+CFLAGS <span class="token operator">=</span> -g <span class="token comment"># Flag for implicit rules. Turn on debug info</span>
+
+<span class="token comment"># Implicit rule #1: blah is built via the C linker implicit rule</span>
+<span class="token comment"># Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists</span>
+<span class="token symbol">blah</span><span class="token punctuation">:</span> blah.o
+
+<span class="token symbol">blah.c</span><span class="token punctuation">:</span>
+	echo <span class="token string">"int main() &#123; return 0; &#125;"</span> > blah.c
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f blah*</code></pre>
+
+<h2 id="Pattern-Rules"><a href="#Pattern-Rules" class="headerlink" title="Pattern Rules"></a>Pattern Rules</h2><p>Pattern rules are often used but quite confusing. You can look at them as two ways:</p>
+<ul>
+<li>A way to define your own implicit rules</li>
+<li>A simpler form of static pattern rules</li>
+</ul>
+<p>Let’s start with an example first:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token comment"># Define a pattern rule that compiles every .c file into a .o file</span>
+<span class="token symbol">%.o</span> <span class="token punctuation">:</span> %.c
+        <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -c <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CPPFLAGS<span class="token punctuation">)</span> <span class="token variable">$&lt;</span> -o <span class="token variable">$@</span></code></pre>
+
+<p>Pattern rules contain a ‘%’ in the target. This ‘%’ matches any nonempty string, and the other characters match themselves. ‘%’ in a prerequisite of a pattern rule stands for the same stem that was matched by the ‘%’ in the target.</p>
+<p>Here’s another example:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token comment"># Define a pattern rule that has no pattern in the prerequisites.</span>
+<span class="token comment"># This just creates empty .c files when needed.</span>
+<span class="token symbol">%.c</span><span class="token punctuation">:</span>
+   touch <span class="token variable">$@</span></code></pre>
+
+<h2 id="Double-Colon-Rules"><a href="#Double-Colon-Rules" class="headerlink" title="Double-Colon Rules"></a>Double-Colon Rules</h2><!--  (Section 4.11) -->
+<p>Double-Colon Rules are rarely used, but allow multiple rules to be defined for the same target. If these were single colons, a warning would be printed and only the second set of commands would run.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">all</span><span class="token punctuation">:</span> blah
+
+<span class="token symbol">blah</span><span class="token punctuation">:</span><span class="token punctuation">:</span>
+	echo <span class="token string">"hello"</span>
+
+<span class="token symbol">blah</span><span class="token punctuation">:</span><span class="token punctuation">:</span>
+	echo <span class="token string">"hello again"</span></code></pre>
+
+
+<h1 id="Commands-and-execution"><a href="#Commands-and-execution" class="headerlink" title="Commands and execution"></a>Commands and execution</h1><h2 id="Command-Echoing-Silencing"><a href="#Command-Echoing-Silencing" class="headerlink" title="Command Echoing/Silencing"></a>Command Echoing/Silencing</h2><!--  (Section 5.1) -->
+<p>Add an <code>@</code> before a command to stop it from being printed<br>You can also run make with <code>-s</code> to add an <code>@</code> before each line  </p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token operator">@</span>echo <span class="token string">"This make line will not be printed"</span>
+	echo <span class="token string">"But this will"</span></code></pre>
+
+<h2 id="Command-Execution"><a href="#Command-Execution" class="headerlink" title="Command Execution"></a>Command Execution</h2><!--  (Section 5.2) -->
+<p>Each command is run in a new shell (or at least the effect is as such)</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">all</span><span class="token punctuation">:</span> 
+	cd ..
+	<span class="token comment"># The cd above does not affect this line, because each command is effectively run in a new shell</span>
+	echo `pwd`
+
+	<span class="token comment"># This cd command affects the next because they are on the same line</span>
+	cd ..<span class="token punctuation">;</span>echo `pwd`
+
+	<span class="token comment"># Same as above</span>
+	cd ..<span class="token punctuation">;</span> \
+	echo `pwd`
+</code></pre>
+
+<h2 id="Default-Shell"><a href="#Default-Shell" class="headerlink" title="Default Shell"></a>Default Shell</h2><!--  (Section 5.2) -->
+<p>The default shell is <code>/bin/sh</code>. You can change this by changing the variable SHELL:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">SHELL<span class="token operator">=</span>/bin/bash
+
+<span class="token symbol">cool</span><span class="token punctuation">:</span>
+	echo <span class="token string">"Hello from bash"</span></code></pre>
+
+<h2 id="Error-handling-with-k-i-and"><a href="#Error-handling-with-k-i-and" class="headerlink" title="Error handling with -k, -i, and -"></a>Error handling with <code>-k</code>, <code>-i</code>, and <code>-</code></h2><!--  (Section 5.4) -->
+<p>Add <code>-k</code> when running make to continue running even in the face of errors. Helpful if you want to see all the errors of Make at once.<br>Add a <code>-</code> before a command to suppress the error<br>Add <code>-i</code> to make to have this happen for every command.</p>
+<!--  (Section 5.4) -->
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">one</span><span class="token punctuation">:</span>
+	<span class="token comment"># This error will be printed but ignored, and make will continue to run</span>
+	-false
+	touch one
+</code></pre>
+
+<h2 id="Interrupting-or-killing-make"><a href="#Interrupting-or-killing-make" class="headerlink" title="Interrupting or killing make"></a>Interrupting or killing make</h2><!--  (Section 5.5) -->
+<p>Note only: If you <code>ctrl+c</code> make, it will delete the newer targets it just made.</p>
+<h2 id="Recursive-use-of-make"><a href="#Recursive-use-of-make" class="headerlink" title="Recursive use of make"></a>Recursive use of make</h2><!--  (Section 5.6) -->
+<p>To recursively call a makefile, use the special <code>$(MAKE)</code> instead of <code>make</code> because it will pass the make flags for you and won’t itself be affected by them.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">new_contents <span class="token operator">=</span> <span class="token string">"hello:\n\ttouch inside_file"</span>
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	mkdir -p subdir
+	printf <span class="token variable">$</span><span class="token punctuation">(</span>new_contents<span class="token punctuation">)</span> <span class="token operator">|</span> sed -e <span class="token string">'s/^ //'</span> > subdir/makefile
+	cd subdir &amp;&amp; <span class="token variable">$</span><span class="token punctuation">(</span>MAKE<span class="token punctuation">)</span>
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -rf subdir
+</code></pre>
+
+<h2 id="Use-export-for-recursive-make"><a href="#Use-export-for-recursive-make" class="headerlink" title="Use export for recursive make"></a>Use export for recursive make</h2><!--  (Section 5.6) -->
+<p>The export directive takes a variable and makes it accessible to sub-make commands. In this example, <code>cooly</code> is exported such that the makefile in subdir can use it.  </p>
+<p>Note: export has the same syntax as sh, but they aren’t related (although similar in function)  </p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">new_contents <span class="token operator">=</span> <span class="token string">"hello:\n\\techo \$$(cooly)"</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	mkdir -p subdir
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>new_contents<span class="token punctuation">)</span> <span class="token operator">|</span> sed -e <span class="token string">'s/^ //'</span> > subdir/makefile
+	<span class="token operator">@</span>echo <span class="token string">"---MAKEFILE CONTENTS---"</span>
+	<span class="token operator">@</span>cd subdir &amp;&amp; cat makefile
+	<span class="token operator">@</span>echo <span class="token string">"---END MAKEFILE CONTENTS---"</span>
+	cd subdir &amp;&amp; <span class="token variable">$</span><span class="token punctuation">(</span>MAKE<span class="token punctuation">)</span>
+
+<span class="token comment"># Note that variables and exports. They are set/affected globally.</span>
+cooly <span class="token operator">=</span> <span class="token string">"The subdirectory can see me!"</span>
+<span class="token keyword">export</span> cooly
+<span class="token comment"># This would nullify the line above: unexport cooly</span>
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -rf subdir</code></pre>
+
+<!--  (Section 5.6) -->
+<p>You need to export variables to have them run in the shell as well.  </p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+one<span class="token operator">=</span>this will only work locally
+<span class="token keyword">export</span> two<span class="token operator">=</span>we can run subcommands with this
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span>
+	<span class="token operator">@</span>echo <span class="token variable">$$one</span>
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>two<span class="token punctuation">)</span>
+	<span class="token operator">@</span>echo <span class="token variable">$$two</span></code></pre>
+
+<!--  (Section 5.6) -->
+<p><code>.EXPORT_ALL_VARIABLES</code> exports all variables for you.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token builtin">.EXPORT_ALL_VARIABLES</span><span class="token punctuation">:</span>
+new_contents <span class="token operator">=</span> <span class="token string">"hello:\n\techo \$$(cooly)"</span>
+
+cooly <span class="token operator">=</span> <span class="token string">"The subdirectory can see me!"</span>
+<span class="token comment"># This would nullify the line above: unexport cooly</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	mkdir -p subdir
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>new_contents<span class="token punctuation">)</span> <span class="token operator">|</span> sed -e <span class="token string">'s/^ //'</span> > subdir/makefile
+	<span class="token operator">@</span>echo <span class="token string">"---MAKEFILE CONTENTS---"</span>
+	<span class="token operator">@</span>cd subdir &amp;&amp; cat makefile
+	<span class="token operator">@</span>echo <span class="token string">"---END MAKEFILE CONTENTS---"</span>
+	cd subdir &amp;&amp; <span class="token variable">$</span><span class="token punctuation">(</span>MAKE<span class="token punctuation">)</span>
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -rf subdir</code></pre>
+
+<h2 id="Arguments-to-make"><a href="#Arguments-to-make" class="headerlink" title="Arguments to make"></a>Arguments to make</h2><!--  (Section 9) -->
+
+<p>There’s a nice <a target="_blank" rel="noopener" href="http://www.gnu.org/software/make/manual/make.html#Options-Summary">list of options</a> that can be run from make. Check out <code>--dry-run</code>, <code>--touch</code>, <code>--old-file</code>. </p>
+<p>You can have multiple targets to make, i.e. <code>make clean run test</code> runs the <code>clean</code> goal, then <code>run</code>, and then <code>test</code>.</p>
+<h1 id="Variables-Pt-2"><a href="#Variables-Pt-2" class="headerlink" title="Variables Pt. 2"></a>Variables Pt. 2</h1><h2 id="Flavors-and-modification"><a href="#Flavors-and-modification" class="headerlink" title="Flavors and modification"></a>Flavors and modification</h2><!-- (6.1, 6.2, 6.3) -->
+<p>There are two flavors of variables:  </p>
+<ul>
+<li>recursive (use <code>=</code>) - only looks for the variables when the command is <em>used</em>, not when it’s <em>defined</em>.  </li>
+<li>simply expanded (use <code>:=</code>) - like normal imperative programming – only those defined so far get expanded</li>
+</ul>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+<span class="token comment"># Recursive variable. This will print "later" below</span>
+one <span class="token operator">=</span> one <span class="token variable">$</span><span class="token punctuation">&#123;</span>later_variable<span class="token punctuation">&#125;</span>
+<span class="token comment"># Simply expanded variable. This will not print "later" below</span>
+two <span class="token operator">:=</span> two <span class="token variable">$</span><span class="token punctuation">&#123;</span>later_variable<span class="token punctuation">&#125;</span>
+
+later_variable <span class="token operator">=</span> later
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>two<span class="token punctuation">)</span></code></pre>
+
+<p>Simply expanded (using <code>:=</code>) allows you to append to a variable. Recursive definitions will give an infinite loop error.  </p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+one <span class="token operator">=</span> hello
+<span class="token comment"># one gets defined as a simply expanded variable (:=) and thus can handle appending</span>
+one <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">&#123;</span>one<span class="token punctuation">&#125;</span> there
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span></code></pre>
+
+<p><code>?=</code> only sets variables if they have not yet been set</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+one <span class="token operator">=</span> hello
+one <span class="token operator">?=</span> will not be set
+two <span class="token operator">?=</span> will be set
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>two<span class="token punctuation">)</span></code></pre>
+
+<p>Spaces at the end of a line are not stripped, but those at the start are. To make a variable with a single space, use <code>$(nullstring)</code></p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">with_spaces <span class="token operator">=</span> hello   <span class="token comment"># with_spaces has many spaces after "hello"</span>
+after <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>with_spaces<span class="token punctuation">)</span>there
+
+nullstring <span class="token operator">=</span>
+space <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>nullstring<span class="token punctuation">)</span> <span class="token comment"># Make a variable with a single space.</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	echo <span class="token string">"$(after)"</span>
+	echo start<span class="token string">"$(space)"</span>end</code></pre>
+
+<p>An undefined variable is actually an empty string!</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token comment"># Undefined variables are just empty strings!</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>nowhere<span class="token punctuation">)</span></code></pre>
+
+<p>Use <code>+=</code> to append</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">foo <span class="token operator">:=</span> start
+foo <span class="token operator">+=</span> more
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span></code></pre>
+
+<p><a href="#string-substitution">String Substitution</a> is also a really common and useful way to modify variables. Also check out <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Text-Functions.html#Text-Functions">Text Functions</a> and <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/File-Name-Functions.html#File-Name-Functions">Filename Functions</a>.</p>
+<h2 id="Command-line-arguments-and-override"><a href="#Command-line-arguments-and-override" class="headerlink" title="Command line arguments and override"></a>Command line arguments and override</h2><!--  (Section 6.7) -->
+<p>You can override variables that come from the command line by using <code>override</code>.<br>Here we ran make with <code>make option_one=hi</code></p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token comment"># Overrides command line arguments</span>
+<span class="token keyword">override</span> option_one <span class="token operator">=</span> did_override
+<span class="token comment"># Does not override command line arguments</span>
+option_two <span class="token operator">=</span> not_override
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>option_one<span class="token punctuation">)</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>option_two<span class="token punctuation">)</span></code></pre>
+
+<h2 id="List-of-commands-and-define"><a href="#List-of-commands-and-define" class="headerlink" title="List of commands and define"></a>List of commands and define</h2><!--  (Section 6.8) -->
+<p>“define” is actually just a list of commands. It has nothing to do with being a function.<br>Note here that it’s a bit different than having a semi-colon between commands, because each is run<br>in a separate shell, as expected.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+one <span class="token operator">=</span> <span class="token keyword">export</span> blah<span class="token operator">=</span><span class="token string">"I was set!"</span><span class="token punctuation">;</span> echo <span class="token variable">$$blah</span>
+
+<span class="token keyword">define</span> two
+<span class="token keyword">export</span> blah<span class="token operator">=</span>set
+echo <span class="token variable">$$blah</span>
+<span class="token keyword">endef</span>
+
+<span class="token comment"># One and two are different.</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token operator">@</span>echo <span class="token string">"This prints 'I was set'"</span>
+	<span class="token operator">@</span><span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span>
+	<span class="token operator">@</span>echo <span class="token string">"This does not print 'I was set' because each command runs in a separate shell"</span>
+	<span class="token operator">@</span><span class="token variable">$</span><span class="token punctuation">(</span>two<span class="token punctuation">)</span></code></pre>
+
+<h2 id="Target-specific-variables"><a href="#Target-specific-variables" class="headerlink" title="Target-specific variables"></a>Target-specific variables</h2><!--  (Section 6.10) -->
+<p>Variables can be assigned for specific targets</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+<span class="token symbol">all</span><span class="token punctuation">:</span> one <span class="token operator">=</span> cool
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+<span class="token symbol">	echo one is defined</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span>
+
+<span class="token symbol">other</span><span class="token punctuation">:</span>
+<span class="token symbol">	echo one is nothing</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span></code></pre>
+
+<h2 id="Pattern-specific-variables"><a href="#Pattern-specific-variables" class="headerlink" title="Pattern-specific variables"></a>Pattern-specific variables</h2><!--  (Section 6.11) -->
+<p>You can assign variables for specific target <em>patterns</em></p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+<span class="token symbol">%.c</span><span class="token punctuation">:</span> one <span class="token operator">=</span> cool
+
+<span class="token symbol">blah.c</span><span class="token punctuation">:</span> 
+<span class="token symbol">	echo one is defined</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span>
+
+<span class="token symbol">other</span><span class="token punctuation">:</span>
+<span class="token symbol">	echo one is nothing</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span></code></pre>
+
+<h1 id="Conditional-part-of-Makefiles"><a href="#Conditional-part-of-Makefiles" class="headerlink" title="Conditional part of Makefiles"></a>Conditional part of Makefiles</h1><h2 id="Conditional-if-else"><a href="#Conditional-if-else" class="headerlink" title="Conditional if/else"></a>Conditional if/else</h2><!--  (Section 7.1) -->
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+foo <span class="token operator">=</span> ok
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+<span class="token keyword">ifeq</span> <span class="token punctuation">(</span><span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span>, ok<span class="token punctuation">)</span>
+	echo <span class="token string">"foo equals ok"</span>
+<span class="token keyword">else</span>
+	echo <span class="token string">"nope"</span>
+<span class="token keyword">endif</span></code></pre>
+
+<h2 id="Check-if-a-variable-is-empty"><a href="#Check-if-a-variable-is-empty" class="headerlink" title="Check if a variable is empty"></a>Check if a variable is empty</h2><!--  (Section 7.2) -->
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">nullstring <span class="token operator">=</span>
+foo <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>nullstring<span class="token punctuation">)</span> <span class="token comment"># end of line; there is a space here</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+<span class="token keyword">ifeq</span> <span class="token punctuation">(</span><span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">strip</span> <span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">)</span>,<span class="token punctuation">)</span>
+	echo <span class="token string">"foo is empty after being stripped"</span>
+<span class="token keyword">endif</span>
+<span class="token keyword">ifeq</span> <span class="token punctuation">(</span><span class="token variable">$</span><span class="token punctuation">(</span>nullstring<span class="token punctuation">)</span>,<span class="token punctuation">)</span>
+	echo <span class="token string">"nullstring doesn't even have spaces"</span>
+<span class="token keyword">endif</span></code></pre>
+
+<h2 id="Check-if-a-variable-is-defined"><a href="#Check-if-a-variable-is-defined" class="headerlink" title="Check if a variable is defined"></a>Check if a variable is defined</h2><!--  (Section 7.2) -->
+<p>ifdef does not expand variable references; it just sees if something is defined at all</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+bar <span class="token operator">=</span>
+foo <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+<span class="token keyword">ifdef</span> foo
+	echo <span class="token string">"foo is defined"</span>
+<span class="token keyword">endif</span>
+<span class="token keyword">ifdef</span> bar
+	echo <span class="token string">"but bar is not"</span>
+<span class="token keyword">endif</span>
+</code></pre>
+
+<h2 id="makeflags"><a href="#makeflags" class="headerlink" title="$(makeflags)"></a>$(makeflags)</h2><!-- `(Section 7.3) -->
+<p>This example shows you how to test make flags with <code>findstring</code> and <code>MAKEFLAGS</code>. Run this example with <code>make -i</code> to see it print out the echo statement.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+bar <span class="token operator">=</span>
+foo <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+<span class="token comment"># Search for the "-i" flag. MAKEFLAGS is just a list of single characters, one per flag. So look for "i" in this case.</span>
+<span class="token keyword">ifneq</span> <span class="token punctuation">(</span>,<span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">findstring</span> i, <span class="token variable">$</span><span class="token punctuation">(</span>MAKEFLAGS<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	echo <span class="token string">"i was passed to MAKEFLAGS"</span>
+<span class="token keyword">endif</span></code></pre>
+
+<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><h2 id="First-Functions"><a href="#First-Functions" class="headerlink" title="First Functions"></a>First Functions</h2><!--  (Section 8.1) -->
+<p><em>Functions</em> are mainly just for text processing. Call functions with <code>$(fn, arguments)</code> or <code>$&#123;fn, arguments&#125;</code>. You can make your own using the <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Call-Function.html#Call-Function">call</a> builtin function. Make has a decent amount of <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Functions.html">builtin functions</a>.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">bar <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">&#123;</span>subst not, totally, <span class="token string">"I am not superman"</span><span class="token punctuation">&#125;</span>
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span>
+</code></pre>
+
+<p>If you want to replace spaces or commas, use variables</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">comma <span class="token operator">:=</span> ,
+empty<span class="token operator">:=</span>
+space <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>empty<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>empty<span class="token punctuation">)</span>
+foo <span class="token operator">:=</span> a b c
+bar <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">subst</span> <span class="token variable">$</span><span class="token punctuation">(</span>space<span class="token punctuation">)</span>,<span class="token variable">$</span><span class="token punctuation">(</span>comma<span class="token punctuation">)</span>,<span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span></code></pre>
+
+<p>Do NOT include spaces in the arguments after the first. That will be seen as part of the string.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">comma <span class="token operator">:=</span> ,
+empty<span class="token operator">:=</span>
+space <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>empty<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>empty<span class="token punctuation">)</span>
+foo <span class="token operator">:=</span> a b c
+bar <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">subst</span> <span class="token variable">$</span><span class="token punctuation">(</span>space<span class="token punctuation">)</span>, <span class="token variable">$</span><span class="token punctuation">(</span>comma<span class="token punctuation">)</span> , <span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token comment"># Output is ", a , b , c". Notice the spaces introduced</span>
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span>
+</code></pre>
+
+<!-- # 8.2, 8.3, 8.9 TODO do something about the fns   
+# TODO 8.7 origin fn? Better in documentation?
+-->
+
+<h2 id="String-Substitution"><a href="#String-Substitution" class="headerlink" title="String Substitution"></a>String Substitution</h2><p><code>$(patsubst pattern,replacement,text)</code> does the following:</p>
+<p>“Finds whitespace-separated words in text that match pattern and replaces them with replacement. Here pattern may contain a ‘%’ which acts as a wildcard, matching any number of any characters within a word. If replacement also contains a ‘%’, the ‘%’ is replaced by the text that matched the ‘%’ in pattern. Only the first ‘%’ in the pattern and replacement is treated this way; any subsequent ‘%’ is unchanged.” (<a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Text-Functions.html#Text-Functions">GNU docs</a>)</p>
+<p>The substitution reference <code>$(text:pattern=replacement)</code> is a shorthand for this.</p>
+<p>There’s another shorthand that that replaces only suffixes: <code>$(text:suffix=replacement)</code>. No <code>%</code> wildcard is used here.</p>
+<p>Note: don’t add extra spaces for this shorthand. It will be seen as a search or replacement term.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">foo <span class="token operator">:=</span> a.o b.o l.a c.o
+one <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">patsubst</span> %.o,%.c,<span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># This is a shorthand for the above</span>
+two <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">:</span>%.o<span class="token operator">=</span>%.c<span class="token punctuation">)</span>
+<span class="token comment"># This is the suffix-only shorthand, and is also equivalent to the above.</span>
+three <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">:</span>.o<span class="token operator">=</span>.c<span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>one<span class="token punctuation">)</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>two<span class="token punctuation">)</span>
+	echo <span class="token variable">$</span><span class="token punctuation">(</span>three<span class="token punctuation">)</span></code></pre>
+
+<h2 id="The-foreach-function"><a href="#The-foreach-function" class="headerlink" title="The foreach function"></a>The foreach function</h2><!--  (Section 8.4) -->
+<p>The foreach function looks like this: <code>$(foreach var,list,text)</code>. It converts one list of words (separated by spaces) to another. <code>var</code> is set to each word in list, and <code>text</code> is expanded for each word.<br>This appends an exclamation after each word:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">foo <span class="token operator">:=</span> who are you
+<span class="token comment"># For each "word" in foo, output that same word with an exclamation after</span>
+bar <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">foreach</span> wrd,<span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span>,<span class="token variable">$</span><span class="token punctuation">(</span>wrd<span class="token punctuation">)</span>!<span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	<span class="token comment"># Output is "who! are! you!"</span>
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span></code></pre>
+
+<h2 id="The-if-function"><a href="#The-if-function" class="headerlink" title="The if function"></a>The if function</h2><!--  (Section 8.5) -->
+<p><code>if</code> checks if the first argument is nonempty. If so runs the second argument, otherwise runs the third.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">foo <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">if</span> this-is-not-empty,then!,<span class="token keyword">else</span>!<span class="token punctuation">)</span>
+empty <span class="token operator">:=</span>
+bar <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token variable">$</span><span class="token punctuation">(</span>empty<span class="token punctuation">)</span>,then!,<span class="token keyword">else</span>!<span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span>
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span></code></pre>
+
+<h2 id="The-call-function"><a href="#The-call-function" class="headerlink" title="The call function"></a>The call function</h2><!--  (Section 8.6) -->
+<p>Make supports creating basic functions. You “define” the function just by creating a variable, but use the parameters <code>$(0)</code>, <code>$(1)</code>, etc. You then call the function with the special <code>call</code> function. The syntax is <code>$(call variable,param,param)</code>. <code>$(0)</code> is the variable, while <code>$(1)</code>, <code>$(2)</code>, etc. are the params.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">sweet_new_fn <span class="token operator">=</span> Variable Name<span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>0<span class="token punctuation">)</span> First<span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>1<span class="token punctuation">)</span> Second<span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>2<span class="token punctuation">)</span> Empty Variable<span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>3<span class="token punctuation">)</span>
+
+<span class="token symbol">all</span><span class="token punctuation">:</span>
+	<span class="token comment"># Outputs "Variable Name: sweet_new_fn First: go Second: tigers Empty Variable:"</span>
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">call</span> sweet_new_fn, go, tigers<span class="token punctuation">)</span></code></pre>
+
+<h2 id="The-shell-function"><a href="#The-shell-function" class="headerlink" title="The shell function"></a>The shell function</h2><!--  (Section 8.8) -->
+<p>shell - This calls the shell, but it replaces newlines with spaces!</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">all</span><span class="token punctuation">:</span> 
+	<span class="token operator">@</span>echo <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> ls -la<span class="token punctuation">)</span> <span class="token comment"># Very ugly because the newlines are gone!</span></code></pre>
+
+<h1 id="Other-Features"><a href="#Other-Features" class="headerlink" title="Other Features"></a>Other Features</h1><h2 id="Include-Makefiles"><a href="#Include-Makefiles" class="headerlink" title="Include Makefiles"></a>Include Makefiles</h2><p>The include directive tells make to read one or more other makefiles. It’s a line in the makefile makefile that looks like this:</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token keyword">include</span> filenames...</code></pre>
+
+<p>This is particularly useful when you use compiler flags like <code>-M</code> that create Makefiles based on the source. For example, if some c files includes a header, that header will be added to a Makefile that’s written by gcc. I talk about this more in the <a href="#makefile-cookbook">Makefile Cookbook</a></p>
+<h2 id="The-vpath-Directive"><a href="#The-vpath-Directive" class="headerlink" title="The vpath Directive"></a>The vpath Directive</h2><!--  (Section 4.3.2) -->
+<p>Use vpath to specify where some set of prerequisites exist. The format is <code>vpath &lt;pattern&gt; &lt;directories, space/colon separated&gt;</code><br><code>&lt;pattern&gt;</code> can have a <code>%</code>, which matches any zero or more characters.<br>You can also do this globallyish with the variable VPATH  </p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile">
+<span class="token keyword">vpath</span> %.h ../headers ../other-directory
+
+<span class="token symbol">some_binary</span><span class="token punctuation">:</span> ../headers blah.h
+	touch some_binary
+
+<span class="token symbol">../headers</span><span class="token punctuation">:</span>
+	mkdir ../headers
+
+<span class="token symbol">blah.h</span><span class="token punctuation">:</span>
+	touch ../headers/blah.h
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -rf ../headers
+	rm -f some_binary
+</code></pre>
+
+<h2 id="Multiline"><a href="#Multiline" class="headerlink" title="Multiline"></a>Multiline</h2><p>The backslash (“\“) character gives us the ability to use multiple lines when the commands are too long</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">some_file</span><span class="token punctuation">:</span> 
+	echo This line is too long, so \
+		it is broken up into multiple lines</code></pre>
+
+<h2 id="phony"><a href="#phony" class="headerlink" title=".phony"></a>.phony</h2><p>Adding <code>.PHONY</code> to a target will prevent make from confusing the phony target with a file name. In this example, if the file <code>clean</code> is created, make clean will still be run. <code>.PHONY</code> is great to use, but I’ll skip it in the rest of the examples for simplicity.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token symbol">some_file</span><span class="token punctuation">:</span>
+	touch some_file
+	touch clean
+ 
+<span class="token builtin">.PHONY</span><span class="token punctuation">:</span> clean
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f some_file
+	rm -f clean</code></pre>
+
+<h2 id="delete-on-error"><a href="#delete-on-error" class="headerlink" title=".delete_on_error"></a>.delete_on_error</h2><!-- (Section 5.4) -->
+
+<p>The make tool will stop running a rule (and will propogate back to prerequisites) if a command returns a nonzero exit status.<br><code>DELETE_ON_ERROR</code> will delete the target of a rule if the rule fails in this manner. This will happen for all targets, not just the one it is before like PHONY. It’s a good idea to always use this, even though make does not for historical reasons.  </p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token builtin">.DELETE_ON_ERROR</span><span class="token punctuation">:</span>
+<span class="token symbol">all</span><span class="token punctuation">:</span> one two
+
+<span class="token symbol">one</span><span class="token punctuation">:</span>
+	touch one
+	false
+
+<span class="token symbol">two</span><span class="token punctuation">:</span>
+	touch two
+	false</code></pre>
+
+<h1 id="Makefile-Cookbook"><a href="#Makefile-Cookbook" class="headerlink" title="Makefile Cookbook"></a>Makefile Cookbook</h1><p>Let’s go through a really juicy Make example that works well for medium sized projects.</p>
+<p>The neat thing about this makefile is it automatically determines dependencies for you. All you have to do is put your C/C++ files in the <code>src/</code> folder.</p>
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token comment"># Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)</span>
+TARGET_EXEC <span class="token operator">:=</span> final_program
+
+BUILD_DIR <span class="token operator">:=</span> ./build
+SRC_DIRS <span class="token operator">:=</span> ./src
+
+<span class="token comment"># Find all the C and C++ files we want to compile</span>
+SRCS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> find <span class="token variable">$</span><span class="token punctuation">(</span>SRC_DIRS<span class="token punctuation">)</span> -name *.cpp -or -name *.c<span class="token punctuation">)</span>
+
+<span class="token comment"># String substitution for every C/C++ file.</span>
+<span class="token comment"># As an example, hello.cpp turns into ./build/hello.cpp.o</span>
+OBJS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>SRCS<span class="token punctuation">:</span>%<span class="token operator">=</span><span class="token variable">$</span><span class="token punctuation">(</span>BUILD_DIR<span class="token punctuation">)</span>/%.o<span class="token punctuation">)</span>
+
+<span class="token comment"># String substitution (suffix version without %).</span>
+<span class="token comment"># As an example, ./build/hello.cpp.o turns into ./build/hello.cpp.d</span>
+DEPS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">:</span>.o<span class="token operator">=</span>.d<span class="token punctuation">)</span>
+
+<span class="token comment"># Every folder in ./src will need to be passed to GCC so that it can find header files</span>
+INC_DIRS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> find <span class="token variable">$</span><span class="token punctuation">(</span>SRC_DIRS<span class="token punctuation">)</span> -type d<span class="token punctuation">)</span>
+<span class="token comment"># Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag</span>
+INC_FLAGS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>addprefix -I,<span class="token variable">$</span><span class="token punctuation">(</span>INC_DIRS<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># The -MMD and -MP flags together generate Makefiles for us!</span>
+<span class="token comment"># These files will have .d instead of .o as the output.</span>
+CPPFLAGS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span>INC_FLAGS<span class="token punctuation">)</span> -MMD -MP
+
+<span class="token comment"># The final build step.</span>
+<span class="token symbol"><span class="token variable">$</span>(BUILD_DIR)/<span class="token variable">$</span>(TARGET_EXEC)</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span>
+	<span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> -o <span class="token variable">$@</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span>
+
+<span class="token comment"># Build step for C source</span>
+<span class="token symbol"><span class="token variable">$</span>(BUILD_DIR)/%.c.o</span><span class="token punctuation">:</span> %.c
+	mkdir -p <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">dir</span> <span class="token variable">$@</span><span class="token punctuation">)</span>
+	<span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CPPFLAGS<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -c <span class="token variable">$&lt;</span> -o <span class="token variable">$@</span>
+
+<span class="token comment"># Build step for C++ source</span>
+<span class="token symbol"><span class="token variable">$</span>(BUILD_DIR)/%.cpp.o</span><span class="token punctuation">:</span> %.cpp
+	mkdir -p <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">dir</span> <span class="token variable">$@</span><span class="token punctuation">)</span>
+	<span class="token variable">$</span><span class="token punctuation">(</span>CXX<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CPPFLAGS<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CXXFLAGS<span class="token punctuation">)</span> -c <span class="token variable">$&lt;</span> -o <span class="token variable">$@</span>
+
+
+<span class="token builtin">.PHONY</span><span class="token punctuation">:</span> clean
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -r <span class="token variable">$</span><span class="token punctuation">(</span>BUILD_DIR<span class="token punctuation">)</span>
+
+<span class="token comment"># Include the .d makefiles. The - at the front suppresses the errors of missing</span>
+<span class="token comment"># Makefiles. Initially, all the .d files will be missing, and we don't want those</span>
+<span class="token comment"># errors to show up.</span>
+<span class="token keyword">-include</span> <span class="token variable">$</span><span class="token punctuation">(</span>DEPS<span class="token punctuation">)</span></code></pre>
+
+<!--
+TODO: This example fails initially because blah.d doesn't exist. I'm not sure how to fix this example, there are probably better ones out there..
+
+# Generating Prerequisites Automatically (Section 4.12)
+Example requires: blah.c  
+Generating prereqs automatically  
+This makes one small makefile per source file  
+Notes:  
+1) $$ is the current process id in bash. $$$$ is just $$, with escaping. We use it to make a temporary file, that doesn't interfere with others if there is some parallel builds going on.  
+2) cc -MM outputs a makefile line. This is the magic that generates prereqs automatically, by looking at the code itself  
+3) The purpose of the sed command is to translate (for example):  
+    main.o : main.c defs.h  
+    into:  
+    main.o main.d : main.c defs.h  
+4) Running `make clean` will rerun the rm -f ... rule because the include line wants to include an up to date version of the file. There is such a target that updates it, so it runs that rule before including the file.  
+<pre class="language-makefile" data-language="makefile"><code class="language-makefile"><span class="token comment"># Run make init first, then run make</span>
+<span class="token comment"># This outputs</span>
+<span class="token symbol">all</span><span class="token punctuation">:</span> blah.d
+
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+	rm -f blah.d blah.c blah.h blah.o blah
+
+<span class="token symbol">%.d</span><span class="token punctuation">:</span> %.c
+	rm -f <span class="token variable">$@;</span> \
+	 <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -MM <span class="token variable">$</span><span class="token punctuation">(</span>CPPFLAGS<span class="token punctuation">)</span> <span class="token variable">$&lt;</span> > <span class="token variable">$@.$$$$;</span> \
+	 sed <span class="token string">'s,\($*\)\.o[ :]*,\1.o $@ : ,g'</span> &lt; <span class="token variable">$@.$$$$</span> > <span class="token variable">$@;</span> \
+	 rm -f <span class="token variable">$@.$$$$</span>
+
+<span class="token symbol">init</span><span class="token punctuation">:</span>
+	echo <span class="token string">"#include \"blah.h\"; int main() &#123; return 0; &#125;"</span> > blah.c
+	touch blah.h
+
+sources <span class="token operator">=</span> blah.c
+
+<span class="token symbol">include <span class="token variable">$</span>(sources</span><span class="token punctuation">:</span>.c<span class="token operator">=</span>.d<span class="token punctuation">)</span></code></pre>
+<p>–&gt;</p>
+</div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="Donate" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-alipay-line"></use></svg></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/aylax/cdn/img/qr/none.jpeg" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-pay-line"></use></svg></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>aylax</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://aylax.github.io/2021/07/12/program/guide.d/program__guide_makefile/" title="君は Makefile が本当に上手(です)">https://aylax.github.io/2021/07/12/program/guide.d/program__guide_makefile/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> unless otherwise stated.</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/07/24/program/guide.d/program__guide_k8s/" rel="prev" title="君は k8s が本当に上手(です)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">君は k8s が本当に上手(です)</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/06/30/program/guide.d/program__guide_markdown/" rel="next" title="markdown 使用指南"><span class="post-nav-text">markdown 使用指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> aylax</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v5.4.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.1</span></div><div class="footer-support"><span></span><a class="footer-support-logo" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral" target="blank" title="YouPaiYun"><img height="30" src="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/logo/upyun-logo.png" alt="YouPaiYun"></a><span></span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="Search"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="Searching..." value=""></div><div id="local-search-result"></div></div></div></body></html>
